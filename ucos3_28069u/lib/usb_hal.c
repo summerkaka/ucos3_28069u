@@ -119,6 +119,8 @@ f28x_USB0DeviceIntHandler(void)
     CPU_CRITICAL_EXIT();
 
     USB0DeviceIntHandler();
+
+    BSP_IntAck((CPU_DATA)BSP_INT_ID_INT5_8);
                                                             /* Re-enable the interrupt.                               */
     BSP_IntEn(BSP_INT_ID_INT5_8);
 
