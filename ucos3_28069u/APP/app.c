@@ -37,14 +37,12 @@
 *********************************************************************************************************
 */
 
+
 #include  <ucos_ii.h>
 #include  <cpu_core.h>
 #include  <lib_def.h>
 
-#include  "../BSP/bsp.h"
-#include "../APP/app_cfg.h"
-
-#include "../BSP/usb_dev_bulk.h"
+#include "app_include.h"
 
 
 /*
@@ -74,7 +72,27 @@ CPU_STK_SIZE  App_TaskPendStk[APP_CFG_TASK_STK_SIZE];
                                                                 /* Pong Task's stack.                                   */
 CPU_STK_SIZE  App_TaskPostStk[APP_CFG_TASK_STK_SIZE];
 
-static  OS_EVENT    *AppTaskObjSem;
+CPU_STK_SIZE  App_TaskUsbRxStk[APP_CFG_TASK_USB_STK_SIZE];
+
+CPU_STK_SIZE  App_TaskUsbTxStk[APP_CFG_TASK_USB_STK_SIZE];
+
+OS_EVENT        *AppTaskObjSem;
+
+OS_EVENT        *pUsbMsgQ;
+
+void            *UsbMsgQTb[APP_CFG_USBQ_NUM];
+
+OS_MEM          *pUsbPartition;
+
+INT8U           UsbPartition[APP_CFG_USBQ_NUM][APP_CFG_PARTITION_SIZE];  // 5 x 256
+
+OS_EVENT        *pTaskQ;
+
+void            *TaskQTb[APP_CFG_TASKQ_NUM];
+
+OS_MEM          *pTaskPartition;
+
+INT8U           TaskPartition[APP_CFG_TASKQ_NUM][APP_CFG_PARTITION_SIZE];  // 10 x 256
 
 
 /*
@@ -129,9 +147,9 @@ int  main (void)
     OSStart();
 
                                                                 /* Should never get here.                               */
-	while (DEF_TRUE) {
-		;
-	}
+    while (DEF_TRUE) {
+        ;
+    }
 }
 
 
@@ -168,6 +186,17 @@ static  void  App_TaskStart (void *p_arg)
                                                                 /* Create the Ping task.                                */
     AppTaskObjSem = OSSemCreate(0);
 
+#ifdef DEBUG
+    pUsbMsgQ = OSQCreate(&UsbMsgQTb[0], APP_CFG_USBQ_NUM);
+
+    pUsbPartition = OSMemCreate(UsbPartition, APP_CFG_USBQ_NUM, APP_CFG_PARTITION_SIZE, &os_err);
+
+    pTaskQ = OSQCreate(&TaskQTb[0], APP_CFG_TASKQ_NUM);
+
+    pTaskPartition = OSMemCreate(TaskPartition, APP_CFG_TASKQ_NUM, APP_CFG_PARTITION_SIZE, &os_err);
+
+#endif
+
     OSTaskCreateExt(App_TaskPing,
                     (void    *)0,
                     (CPU_STK *)&App_TaskPendStk[0],
@@ -188,7 +217,29 @@ static  void  App_TaskStart (void *p_arg)
                     (INT32U   )APP_CFG_TASK_STK_SIZE,
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+#ifdef DEBUG
+                                                                /* Create the UsbRx task.                                */
+    OSTaskCreateExt(App_TaskUsbRx,
+                    (void    *)0,
+                    (CPU_STK *)&App_TaskUsbRxStk[0],
+                    (INT8U    )APP_CFG_TASK_USBRX_PRIO,
+                    (INT16U   )APP_CFG_TASK_USBRX_PRIO,
+                    (CPU_STK *)&App_TaskUsbRxStk[APP_CFG_TASK_USB_STK_SIZE - 1u],
+                    (INT32U   )APP_CFG_TASK_USB_STK_SIZE,
+                    (void    *)0,
+                    (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 
+                                                                /* Create the UsbTx task.                                */
+    OSTaskCreateExt(App_TaskUsbTx,
+                    (void    *)0,
+                    (CPU_STK *)&App_TaskUsbTxStk[0],
+                    (INT8U    )APP_CFG_TASK_USBTX_PRIO,
+                    (INT16U   )APP_CFG_TASK_USBTX_PRIO,
+                    (CPU_STK *)&App_TaskUsbTxStk[APP_CFG_TASK_USB_STK_SIZE - 1u],
+                    (INT32U   )APP_CFG_TASK_USB_STK_SIZE,
+                    (void    *)0,
+                    (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+#endif
                                                                 /* All tasks should be written as an infinite loop.     */
     while (DEF_TRUE) {
         os_err = OSSemPost(AppTaskObjSem);

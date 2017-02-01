@@ -13,7 +13,10 @@ BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/APP/app_cfg.h
 BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/APP/os_cfg.h
 BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/uCOS-II/Ports/C28x/Generic/CCS/os_cpu.h
 BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/uCOS-II/Source/os.h
-BSP/bsp.obj: ../BSP/../include/F2806x_Device.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/APP/app_include.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/include/DSP28x_Project.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Cla_typedefs.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Device.h
 BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Adc.h
 BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_BootVars.h
 BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Cla.h
@@ -37,9 +40,42 @@ BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/
 BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_SysCtrl.h
 BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Usb.h
 BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_XIntrupt.h
-BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/usb_hal.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Examples.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_GlobalPrototypes.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_EPwm_defines.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_I2c_defines.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Dma_defines.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Cla_defines.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_DefaultISR.h
+BSP/bsp.obj: C:/ti/ccsv7/tools/compiler/ti-cgt-c2000_16.9.1.LTS/include/stdio.h
+BSP/bsp.obj: C:/ti/ccsv7/tools/compiler/ti-cgt-c2000_16.9.1.LTS/include/linkage.h
+BSP/bsp.obj: C:/ti/ccsv7/tools/compiler/ti-cgt-c2000_16.9.1.LTS/include/stdarg.h
+BSP/bsp.obj: C:/ti/ccsv7/tools/compiler/ti-cgt-c2000_16.9.1.LTS/include/stdbool.h
 BSP/bsp.obj: C:/ti/ccsv7/tools/compiler/ti-cgt-c2000_16.9.1.LTS/include/stdint.h
-BSP/bsp.obj: ../BSP/usb_dev_bulk.h
+BSP/bsp.obj: C:/ti/ccsv7/tools/compiler/ti-cgt-c2000_16.9.1.LTS/include/string.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/inc/hw_usb.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/inc/hw_memmap.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/inc/hw_types.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/inc/hw_ints.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/debug.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/interrupt.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/sysctl.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/systick.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/rom.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/usb.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/usb_hal.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/usblib/usblib.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/usblib/usb-ids.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/usblib/device/usbdevice.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/usblib/device/usbdevicepriv.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/usblib/device/usbdbulk.h
+BSP/bsp.obj: C:/ti/controlSUITE/device_support/f2806x/v151/MWare/utils/uartstdio.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/include/Flash2806x_API_Library.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/Flash2806x_API_Config.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/APP/app.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/APP/usb_bulk_structs.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/APP/usb_dev_bulk.h
+BSP/bsp.obj: C:/03_workspace/ccsv7/ucos3_28069u/APP/usb_handler.h
 
 ../BSP/bsp.c: 
 ../BSP/bsp.h: 
@@ -54,7 +90,10 @@ C:/03_workspace/ccsv7/ucos3_28069u/APP/app_cfg.h:
 C:/03_workspace/ccsv7/ucos3_28069u/APP/os_cfg.h: 
 C:/03_workspace/ccsv7/ucos3_28069u/uCOS-II/Ports/C28x/Generic/CCS/os_cpu.h: 
 C:/03_workspace/ccsv7/ucos3_28069u/uCOS-II/Source/os.h: 
-../BSP/../include/F2806x_Device.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/APP/app_include.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/include/DSP28x_Project.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Cla_typedefs.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Device.h: 
 C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Adc.h: 
 C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_BootVars.h: 
 C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Cla.h: 
@@ -78,6 +117,39 @@ C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Sci.h:
 C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_SysCtrl.h: 
 C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Usb.h: 
 C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_XIntrupt.h: 
-C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/usb_hal.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Examples.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_GlobalPrototypes.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_EPwm_defines.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_I2c_defines.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Dma_defines.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_Cla_defines.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/F2806x_DefaultISR.h: 
+C:/ti/ccsv7/tools/compiler/ti-cgt-c2000_16.9.1.LTS/include/stdio.h: 
+C:/ti/ccsv7/tools/compiler/ti-cgt-c2000_16.9.1.LTS/include/linkage.h: 
+C:/ti/ccsv7/tools/compiler/ti-cgt-c2000_16.9.1.LTS/include/stdarg.h: 
+C:/ti/ccsv7/tools/compiler/ti-cgt-c2000_16.9.1.LTS/include/stdbool.h: 
 C:/ti/ccsv7/tools/compiler/ti-cgt-c2000_16.9.1.LTS/include/stdint.h: 
-../BSP/usb_dev_bulk.h: 
+C:/ti/ccsv7/tools/compiler/ti-cgt-c2000_16.9.1.LTS/include/string.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/inc/hw_usb.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/inc/hw_memmap.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/inc/hw_types.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/inc/hw_ints.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/debug.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/interrupt.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/sysctl.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/systick.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/rom.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/usb.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/driverlib/usb_hal.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/usblib/usblib.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/usblib/usb-ids.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/usblib/device/usbdevice.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/usblib/device/usbdevicepriv.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/usblib/device/usbdbulk.h: 
+C:/ti/controlSUITE/device_support/f2806x/v151/MWare/utils/uartstdio.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/include/Flash2806x_API_Library.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/BSP/OS/uCOS-II/../../../include/Flash2806x_API_Config.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/APP/app.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/APP/usb_bulk_structs.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/APP/usb_dev_bulk.h: 
+C:/03_workspace/ccsv7/ucos3_28069u/APP/usb_handler.h: 

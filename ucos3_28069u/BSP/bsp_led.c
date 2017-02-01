@@ -34,10 +34,9 @@
 */
 
 #define    BSP_LED_MODULE
-#include  "bsp.h"
 
 #include  <os.h>
-#include  "../include/F2806x_Device.h"
+#include  "app_include.h"
 
 /*
 *********************************************************************************************************

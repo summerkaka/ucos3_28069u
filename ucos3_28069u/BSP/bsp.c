@@ -38,9 +38,8 @@
 #include  <bsp_os.h>
 
 #include  <os.h>
-#include  "../include/F2806x_Device.h"
-#include  "driverlib/usb_hal.h"
-#include  "usb_dev_bulk.h"
+
+#include  "app_include.h"
 
 /*
 *********************************************************************************************************

@@ -9,48 +9,36 @@ C_SRCS += \
 ../BSP/bsp.c \
 ../BSP/bsp_int.c \
 ../BSP/bsp_led.c \
-../BSP/cpu_bsp.c \
-../BSP/usb_bulk_structs.c \
-../BSP/usb_dev_bulk.c 
+../BSP/cpu_bsp.c 
 
 C_DEPS += \
 ./BSP/bsp.d \
 ./BSP/bsp_int.d \
 ./BSP/bsp_led.d \
-./BSP/cpu_bsp.d \
-./BSP/usb_bulk_structs.d \
-./BSP/usb_dev_bulk.d 
+./BSP/cpu_bsp.d 
 
 OBJS += \
 ./BSP/bsp.obj \
 ./BSP/bsp_int.obj \
 ./BSP/bsp_led.obj \
-./BSP/cpu_bsp.obj \
-./BSP/usb_bulk_structs.obj \
-./BSP/usb_dev_bulk.obj 
+./BSP/cpu_bsp.obj 
 
 OBJS__QUOTED += \
 "BSP\bsp.obj" \
 "BSP\bsp_int.obj" \
 "BSP\bsp_led.obj" \
-"BSP\cpu_bsp.obj" \
-"BSP\usb_bulk_structs.obj" \
-"BSP\usb_dev_bulk.obj" 
+"BSP\cpu_bsp.obj" 
 
 C_DEPS__QUOTED += \
 "BSP\bsp.d" \
 "BSP\bsp_int.d" \
 "BSP\bsp_led.d" \
-"BSP\cpu_bsp.d" \
-"BSP\usb_bulk_structs.d" \
-"BSP\usb_dev_bulk.d" 
+"BSP\cpu_bsp.d" 
 
 C_SRCS__QUOTED += \
 "../BSP/bsp.c" \
 "../BSP/bsp_int.c" \
 "../BSP/bsp_led.c" \
-"../BSP/cpu_bsp.c" \
-"../BSP/usb_bulk_structs.c" \
-"../BSP/usb_dev_bulk.c" 
+"../BSP/cpu_bsp.c" 
 
 

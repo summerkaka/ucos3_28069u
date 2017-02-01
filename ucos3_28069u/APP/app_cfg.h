@@ -43,8 +43,10 @@
 */
 
 #define  APP_CFG_TASK_START_PRIO                      2u
-#define  APP_CFG_TASK_PEND_PRIO                       3u
-#define  APP_CFG_TASK_POST_PRIO                       4u
+#define  APP_CFG_TASK_USBRX_PRIO                      3u
+#define  APP_CFG_TASK_USBTX_PRIO                      4u
+#define  APP_CFG_TASK_PEND_PRIO                       10u
+#define  APP_CFG_TASK_POST_PRIO                       11u
 
 
 /*
@@ -64,6 +66,18 @@
 */
 
 #define  APP_CFG_TASK_STK_SIZE                      128u
+#define  APP_CFG_TASK_USB_STK_SIZE                  256u
+
+
+/*
+*********************************************************************************************************
+*                                            MEMORY PARTITION SIZES
+*********************************************************************************************************
+*/
+
+#define  APP_CFG_PARTITION_SIZE                     256u
+#define  APP_CFG_USBQ_NUM                             5u
+#define  APP_CFG_TASKQ_NUM                           10u
 
 
 /*

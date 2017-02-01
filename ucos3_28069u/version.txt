@@ -3,3 +3,9 @@
 
 2017-01-30
 usb works, add int ack at usb int isr
+
+2017-02-01
+usb loop back with can29 format, use msg_queue. 需要调查为什么只能用pUsbPartition, 不能用pTaskPartition
+
+2017-02-01_2
+usb loop back，不知道为什么，但可以用pTaskPartition了
