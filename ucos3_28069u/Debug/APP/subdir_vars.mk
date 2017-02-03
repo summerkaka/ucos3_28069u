@@ -2,8 +2,6 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-SHELL = cmd.exe
-
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../APP/app.c \
@@ -24,16 +22,16 @@ OBJS += \
 ./APP/usb_handler.obj 
 
 OBJS__QUOTED += \
-"APP\app.obj" \
-"APP\usb_bulk_structs.obj" \
-"APP\usb_dev_bulk.obj" \
-"APP\usb_handler.obj" 
+"APP/app.obj" \
+"APP/usb_bulk_structs.obj" \
+"APP/usb_dev_bulk.obj" \
+"APP/usb_handler.obj" 
 
 C_DEPS__QUOTED += \
-"APP\app.d" \
-"APP\usb_bulk_structs.d" \
-"APP\usb_dev_bulk.d" \
-"APP\usb_handler.d" 
+"APP/app.d" \
+"APP/usb_bulk_structs.d" \
+"APP/usb_dev_bulk.d" \
+"APP/usb_handler.d" 
 
 C_SRCS__QUOTED += \
 "../APP/app.c" \

@@ -49,7 +49,7 @@
 #define I2C_YES_STOP 1
 #define I2C_RECEIVE  0
 #define I2C_TRANSMIT 1
-#define I2C_MAX_BUFFER_SIZE 4
+#define I2C_MAX_BUFFER_SIZE 24
 
 // I2C Slave State defines
 #define I2C_NOTSLAVE      0

@@ -2,8 +2,6 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-SHELL = cmd.exe
-
 # Add inputs and outputs from these tool invocations to the build variables 
 ASM_SRCS += \
 ../uCOS-II/Ports/C28x/Generic/CCS/os_cpu_a.asm \
@@ -28,18 +26,18 @@ ASM_DEPS += \
 ./uCOS-II/Ports/C28x/Generic/CCS/os_cpu_i.d 
 
 OBJS__QUOTED += \
-"uCOS-II\Ports\C28x\Generic\CCS\os_cpu_a.obj" \
-"uCOS-II\Ports\C28x\Generic\CCS\os_cpu_c.obj" \
-"uCOS-II\Ports\C28x\Generic\CCS\os_cpu_i.obj" \
-"uCOS-II\Ports\C28x\Generic\CCS\os_dbg.obj" 
+"uCOS-II/Ports/C28x/Generic/CCS/os_cpu_a.obj" \
+"uCOS-II/Ports/C28x/Generic/CCS/os_cpu_c.obj" \
+"uCOS-II/Ports/C28x/Generic/CCS/os_cpu_i.obj" \
+"uCOS-II/Ports/C28x/Generic/CCS/os_dbg.obj" 
 
 C_DEPS__QUOTED += \
-"uCOS-II\Ports\C28x\Generic\CCS\os_cpu_c.d" \
-"uCOS-II\Ports\C28x\Generic\CCS\os_dbg.d" 
+"uCOS-II/Ports/C28x/Generic/CCS/os_cpu_c.d" \
+"uCOS-II/Ports/C28x/Generic/CCS/os_dbg.d" 
 
 ASM_DEPS__QUOTED += \
-"uCOS-II\Ports\C28x\Generic\CCS\os_cpu_a.d" \
-"uCOS-II\Ports\C28x\Generic\CCS\os_cpu_i.d" 
+"uCOS-II/Ports/C28x/Generic/CCS/os_cpu_a.d" \
+"uCOS-II/Ports/C28x/Generic/CCS/os_cpu_i.d" 
 
 ASM_SRCS__QUOTED += \
 "../uCOS-II/Ports/C28x/Generic/CCS/os_cpu_a.asm" \

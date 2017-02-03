@@ -114,8 +114,8 @@ SUBDIRS := \
 . \
 APP \
 BSP/CCS \
-BSP/OS/uCOS-II \
 BSP \
+BSP/OS/uCOS-II \
 lib \
 uC-CPU/C28x/CCS \
 uC-CPU \

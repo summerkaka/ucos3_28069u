@@ -27,7 +27,7 @@ extern "C" {
 #define DSP28_DIVSEL   2 // Enable /2 for SYSCLKOUT
 //#define DSP28_DIVSEL   3 // Enable /1 for SYSCLKOUT
 
-#define DSP28_PLLCR   18  // Uncomment for 90 MHz devices [90 MHz = (10MHz * 18)/2]
+//#define DSP28_PLLCR   18  // Uncomment for 90 MHz devices [90 MHz = (10MHz * 18)/2]
 //#define DSP28_PLLCR   17
 //#define DSP28_PLLCR   16
 //#define DSP28_PLLCR   15
@@ -36,7 +36,7 @@ extern "C" {
 //#define DSP28_PLLCR   12
 //#define DSP28_PLLCR   11
 //#define DSP28_PLLCR   10
-//#define DSP28_PLLCR    9
+#define DSP28_PLLCR    9
 //#define DSP28_PLLCR    8
 //#define DSP28_PLLCR    7
 //#define DSP28_PLLCR    6

@@ -1,7 +1,7 @@
 /*
  * app_include.h
  *
- *  Created on: 2017Äê1ÔÂ31ÈÕ
+ *  Created on: 2017ï¿½ï¿½1ï¿½ï¿½31ï¿½ï¿½
  *      Author: ZCTIAXIA
  */
 
@@ -44,6 +44,8 @@
 #include "usb_bulk_structs.h"
 #include "usb_dev_bulk.h"
 #include "usb_handler.h"
+
+#include "BSP/I2C.h"
 
 #define DEBUG 1
 

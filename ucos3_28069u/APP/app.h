@@ -1,7 +1,7 @@
 /*
  * app.h
  *
- *  Created on: 2017Äê1ÔÂ31ÈÕ
+ *  Created on: 2017ï¿½ï¿½1ï¿½ï¿½31ï¿½ï¿½
  *      Author: ZCTIAXIA
  */
 
@@ -14,5 +14,9 @@ extern OS_EVENT        *pUsbMsgQ;
 extern OS_EVENT        *pTaskQ;
 extern OS_MEM          *pUsbPartition;
 extern OS_MEM          *pTaskPartition;
+
+extern OS_EVENT        *I2cRunSem;
+extern OS_EVENT        *I2cOverSem;
+extern OS_EVENT        *I2cTcbMutex;
 
 #endif /* APP_APP_H_ */

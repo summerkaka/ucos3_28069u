@@ -43,10 +43,11 @@
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/uCOS-II/Source&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/BSP/OS/uCOS-II&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/uC-LIB&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;C:\ti\controlSUITE\device_support\f2806x\v151\MWare&quot;"/>
+									<listOptionValue builtIn="false" value="/Applications/ti/controlSUITE/device_support/f2806x/v151/MWare"/>
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/APP&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/uC-CPU&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}/uC-CPU/C28x/CCS&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PROJECT_LOC}&quot;"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_16.9.compilerID.DEFINE.1813324918" name="Pre-define NAME (--define, -D)" superClass="com.ti.ccstudio.buildDefinitions.C2000_16.9.compilerID.DEFINE" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="ccs_c2k"/>
@@ -84,7 +85,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="BSP/I2C.c|28069_RAM_lnk.cmd|F28335_Link.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="28069_RAM_lnk.cmd|F28335_Link.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

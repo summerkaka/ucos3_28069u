@@ -1,7 +1,7 @@
 /*
  * I2C.h
  *
- *  Created on: 2015Äê5ÔÂ14ÈÕ
+ *  Created on: 2015ï¿½ï¿½5ï¿½ï¿½14ï¿½ï¿½
  *      Author: xiatian
  */
 
@@ -28,13 +28,10 @@
 
 extern Uint16 I2cBuffer[];
 
-extern struct I2CMSG g_I2cMsg;
-extern uint8_t g_I2cApplication;
+extern struct I2CMSG *g_pI2cMsg;
 
-extern void I2c_Init(void);
-extern void I2cMsg_Reset(void);
-extern void I2CA_RegisterIsr(void);
+void I2c_Init(void);
 __interrupt void i2c_int1a_isr(void);
-extern void I2CA_Server(void);
+void I2c_Thread(void *p_arg);
 
 #endif /* SOURCE_I2C_H_ */

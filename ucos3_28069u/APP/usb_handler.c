@@ -1,7 +1,7 @@
 /*
  * usb_handler.c
  *
- *  Created on: 2017Äê1ÔÂ31ÈÕ
+ *  Created on: 2017ï¿½ï¿½1ï¿½ï¿½31ï¿½ï¿½
  *      Author: ZCTIAXIA
  */
 
@@ -123,14 +123,18 @@ App_TaskUsbTx (void  *p_arg)
         length = MsgCoding((uint8_t *)(buffer + 2), (const uint8_t *)msg, msg->Length + 5) + 2;
         buffer[length++] = 0x10;
         buffer[length++] = 0x03;
+#if DEBUG
         buffer[length++] = msg->Length;
-        buffer[length++] = msg;
-
+        buffer[length++] = (uint32_t)msg >> 24;
+        buffer[length++] = (uint32_t)msg >> 16;
+        buffer[length++] = (uint32_t)msg >> 8;
+        buffer[length++] = (uint32_t)msg;
+#endif
         while (DEF_TRUE) {
             USBBufferInfoGet(&g_sTxBuffer, &sTxRing);
             ulSpace = USBBufferSpaceAvailable(&g_sTxBuffer);
             if (ulSpace >= length) {  // check if space available
-                OSMemPut(pTaskPartition, (void *)msg );
+                OSMemPut(pTaskPartition, (void *)msg);
                 break;
             }
             OSTimeDlyHMSM(0, 0, 1, 0);
@@ -142,6 +146,5 @@ App_TaskUsbTx (void  *p_arg)
             ulWriteIndex = (ulWriteIndex == BULK_BUFFER_SIZE) ? 0 : ulWriteIndex;
         }
         USBBufferDataWritten(&g_sTxBuffer, length);
-
     }
 }

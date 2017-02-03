@@ -425,9 +425,8 @@ void BSP_PeripheralClock_Init(void)
 
 void  BSP_Hardware_Init (void)
 {
-    //I2c_Init();
+    I2c_Init();
 
-    //USB_Bulk_Init();  //prepare config first
     USB_Init();       //then init hw
 
     //UARTStdioInit(0);

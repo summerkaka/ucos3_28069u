@@ -78,6 +78,10 @@ CPU_STK_SIZE  App_TaskUsbTxStk[APP_CFG_TASK_USB_STK_SIZE];
 
 OS_EVENT        *AppTaskObjSem;
 
+OS_EVENT        *I2cRunSem, *I2cOverSem;
+
+OS_EVENT        *I2cTcbMutex;
+
 OS_EVENT        *pUsbMsgQ;
 
 void            *UsbMsgQTb[APP_CFG_USBQ_NUM];
@@ -183,19 +187,14 @@ static  void  App_TaskStart (void *p_arg)
 
     USB_Bulk_Init();
 
+                                                                /* Create the I2c task.                                */
+    I2cRunSem = OSSemCreate(0);
+    I2cOverSem = OSSemCreate(0);
+    I2cTcbMutex = OSMutexCreate(2, &os_err);
+
+
                                                                 /* Create the Ping task.                                */
     AppTaskObjSem = OSSemCreate(0);
-
-#ifdef DEBUG
-    pUsbMsgQ = OSQCreate(&UsbMsgQTb[0], APP_CFG_USBQ_NUM);
-
-    pUsbPartition = OSMemCreate(UsbPartition, APP_CFG_USBQ_NUM, APP_CFG_PARTITION_SIZE, &os_err);
-
-    pTaskQ = OSQCreate(&TaskQTb[0], APP_CFG_TASKQ_NUM);
-
-    pTaskPartition = OSMemCreate(TaskPartition, APP_CFG_TASKQ_NUM, APP_CFG_PARTITION_SIZE, &os_err);
-
-#endif
 
     OSTaskCreateExt(App_TaskPing,
                     (void    *)0,
@@ -217,8 +216,16 @@ static  void  App_TaskStart (void *p_arg)
                     (INT32U   )APP_CFG_TASK_STK_SIZE,
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
-#ifdef DEBUG
+
                                                                 /* Create the UsbRx task.                                */
+    pUsbMsgQ = OSQCreate(&UsbMsgQTb[0], APP_CFG_USBQ_NUM);
+
+    pUsbPartition = OSMemCreate(UsbPartition, APP_CFG_USBQ_NUM, APP_CFG_PARTITION_SIZE, &os_err);
+
+    pTaskQ = OSQCreate(&TaskQTb[0], APP_CFG_TASKQ_NUM);
+
+    pTaskPartition = OSMemCreate(TaskPartition, APP_CFG_TASKQ_NUM, APP_CFG_PARTITION_SIZE, &os_err);
+
     OSTaskCreateExt(App_TaskUsbRx,
                     (void    *)0,
                     (CPU_STK *)&App_TaskUsbRxStk[0],
@@ -239,7 +246,7 @@ static  void  App_TaskStart (void *p_arg)
                     (INT32U   )APP_CFG_TASK_USB_STK_SIZE,
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
-#endif
+
                                                                 /* All tasks should be written as an infinite loop.     */
     while (DEF_TRUE) {
         os_err = OSSemPost(AppTaskObjSem);
