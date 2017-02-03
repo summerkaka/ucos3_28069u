@@ -45,6 +45,7 @@
 #define  APP_CFG_TASK_START_PRIO                      2u
 #define  APP_CFG_TASK_USBRX_PRIO                      3u
 #define  APP_CFG_TASK_USBTX_PRIO                      4u
+#define  APP_CFG_TASK_I2C_PRIO                        5u
 #define  APP_CFG_TASK_PEND_PRIO                       10u
 #define  APP_CFG_TASK_POST_PRIO                       11u
 

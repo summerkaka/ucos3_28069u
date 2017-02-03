@@ -72,6 +72,8 @@ CPU_STK_SIZE  App_TaskPendStk[APP_CFG_TASK_STK_SIZE];
                                                                 /* Pong Task's stack.                                   */
 CPU_STK_SIZE  App_TaskPostStk[APP_CFG_TASK_STK_SIZE];
 
+CPU_STK_SIZE  App_TaskI2cThreadStk[APP_CFG_TASK_STK_SIZE];
+
 CPU_STK_SIZE  App_TaskUsbRxStk[APP_CFG_TASK_USB_STK_SIZE];
 
 CPU_STK_SIZE  App_TaskUsbTxStk[APP_CFG_TASK_USB_STK_SIZE];
@@ -191,6 +193,16 @@ static  void  App_TaskStart (void *p_arg)
     I2cRunSem = OSSemCreate(0);
     I2cOverSem = OSSemCreate(0);
     I2cTcbMutex = OSMutexCreate(2, &os_err);
+
+    OSTaskCreateExt(I2c_Thread,
+                    (void    *)0,
+                    (CPU_STK *)&App_TaskI2cThreadStk[0],
+                    (INT8U    )APP_CFG_TASK_I2C_PRIO,
+                    (INT16U   )APP_CFG_TASK_I2C_PRIO,
+                    (CPU_STK *)&App_TaskI2cThreadStk[APP_CFG_TASK_STK_SIZE - 1u],
+                    (INT32U   )APP_CFG_TASK_STK_SIZE,
+                    (void    *)0,
+                    (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 
 
                                                                 /* Create the Ping task.                                */
