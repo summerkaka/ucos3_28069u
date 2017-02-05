@@ -49,7 +49,7 @@
 #define I2C_YES_STOP 1
 #define I2C_RECEIVE  0
 #define I2C_TRANSMIT 1
-#define I2C_MAX_BUFFER_SIZE 24
+#define I2C_MAX_BUFFER_SIZE 128  // no large than eeprom bank size since not only read but write also use this buffer
 
 // I2C Slave State defines
 #define I2C_NOTSLAVE      0

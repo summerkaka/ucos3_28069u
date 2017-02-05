@@ -75,6 +75,7 @@ BSP/bsp_led.obj: /Volumes/UDISK/ucos3_28069u/ucos3_28069u/uC-LIB/lib_def.h
 BSP/bsp_led.obj: /Volumes/UDISK/ucos3_28069u/ucos3_28069u/APP/usb_bulk_structs.h
 BSP/bsp_led.obj: /Volumes/UDISK/ucos3_28069u/ucos3_28069u/APP/usb_dev_bulk.h
 BSP/bsp_led.obj: /Volumes/UDISK/ucos3_28069u/ucos3_28069u/APP/usb_handler.h
+BSP/bsp_led.obj: /Volumes/UDISK/ucos3_28069u/ucos3_28069u/APP/cmd_handler.h
 BSP/bsp_led.obj: /Volumes/UDISK/ucos3_28069u/ucos3_28069u/BSP/I2C.h
 
 ../BSP/bsp_led.c: 
@@ -152,4 +153,5 @@ BSP/bsp_led.obj: /Volumes/UDISK/ucos3_28069u/ucos3_28069u/BSP/I2C.h
 /Volumes/UDISK/ucos3_28069u/ucos3_28069u/APP/usb_bulk_structs.h: 
 /Volumes/UDISK/ucos3_28069u/ucos3_28069u/APP/usb_dev_bulk.h: 
 /Volumes/UDISK/ucos3_28069u/ucos3_28069u/APP/usb_handler.h: 
+/Volumes/UDISK/ucos3_28069u/ucos3_28069u/APP/cmd_handler.h: 
 /Volumes/UDISK/ucos3_28069u/ucos3_28069u/BSP/I2C.h: 

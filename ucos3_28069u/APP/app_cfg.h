@@ -46,8 +46,9 @@
 #define  APP_CFG_TASK_USBRX_PRIO                      3u
 #define  APP_CFG_TASK_USBTX_PRIO                      4u
 #define  APP_CFG_TASK_I2C_PRIO                        5u
-#define  APP_CFG_TASK_PEND_PRIO                       10u
-#define  APP_CFG_TASK_POST_PRIO                       11u
+#define  APP_CFG_TASK_EROM_PRIO                       10u
+#define  APP_CFG_TASK_PEND_PRIO                       30u
+#define  APP_CFG_TASK_POST_PRIO                       31u
 
 
 /*
@@ -77,8 +78,10 @@
 */
 
 #define  APP_CFG_PARTITION_SIZE                     256u
-#define  APP_CFG_USBQ_NUM                             5u
-#define  APP_CFG_TASKQ_NUM                           10u
+#define  APP_CFG_USBRXQ_NUM                           5u
+#define  APP_CFG_USBTXQ_NUM                           5u
+#define  APP_CFG_EROMQ_NUM                           10u
+#define  APP_CFG_TASKQ_NUM                           50u
 
 
 /*

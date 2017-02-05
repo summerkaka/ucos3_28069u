@@ -44,6 +44,7 @@
 #include "usb_bulk_structs.h"
 #include "usb_dev_bulk.h"
 #include "usb_handler.h"
+#include "cmd_handler.h"
 
 #include "BSP/I2C.h"
 

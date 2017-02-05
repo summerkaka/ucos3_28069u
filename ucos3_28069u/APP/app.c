@@ -65,39 +65,42 @@
 *                                         LOCAL GLOBAL VARIABLES
 *********************************************************************************************************
 */
-                                                                /* Start Task's stack.                                  */
-CPU_STK_SIZE  App_TaskStartStk[APP_CFG_TASK_STK_SIZE];
-                                                                /* Ping Task's stack.                                   */
-CPU_STK_SIZE  App_TaskPendStk[APP_CFG_TASK_STK_SIZE];
-                                                                /* Pong Task's stack.                                   */
-CPU_STK_SIZE  App_TaskPostStk[APP_CFG_TASK_STK_SIZE];
 
-CPU_STK_SIZE  App_TaskI2cThreadStk[APP_CFG_TASK_STK_SIZE];
-
-CPU_STK_SIZE  App_TaskUsbRxStk[APP_CFG_TASK_USB_STK_SIZE];
-
-CPU_STK_SIZE  App_TaskUsbTxStk[APP_CFG_TASK_USB_STK_SIZE];
+CPU_STK_SIZE  App_TaskStartStk[APP_CFG_TASK_STK_SIZE];      /* Start Task's stack.            */
+CPU_STK_SIZE  App_TaskPendStk[APP_CFG_TASK_STK_SIZE];       /* Ping Task's stack.             */
+CPU_STK_SIZE  App_TaskPostStk[APP_CFG_TASK_STK_SIZE];       /* Pong Task's stack.             */
+CPU_STK_SIZE  App_TaskI2cThreadStk[APP_CFG_TASK_STK_SIZE];      // i2c
+CPU_STK_SIZE  App_TaskEepromThreadStk[APP_CFG_TASK_STK_SIZE];   // eeprom
+CPU_STK_SIZE  App_TaskUsbRxStk[APP_CFG_TASK_USB_STK_SIZE];      // usbtx
+CPU_STK_SIZE  App_TaskUsbTxStk[APP_CFG_TASK_USB_STK_SIZE];      // usbrx
 
 OS_EVENT        *AppTaskObjSem;
 
-OS_EVENT        *I2cRunSem, *I2cOverSem;
-
+// i2c thread mutex, sem
+OS_EVENT        *I2cServerRunSem, *I2cIdleSem, *I2cOverSem;
 OS_EVENT        *I2cTcbMutex;
 
-OS_EVENT        *pUsbMsgQ;
+// usb msg queue
+OS_EVENT        *pUsbRxQ;
+OS_EVENT        *pUsbTxQ;
+void            *UsbRxQTb[APP_CFG_USBTXQ_NUM];
+void            *UsbTxQTb[APP_CFG_USBRXQ_NUM];
 
-void            *UsbMsgQTb[APP_CFG_USBQ_NUM];
-
+// usb msg partition
 OS_MEM          *pUsbPartition;
+INT8U           UsbPartition[APP_CFG_USBRXQ_NUM + APP_CFG_USBTXQ_NUM][APP_CFG_PARTITION_SIZE];  // 5 x 256
 
-INT8U           UsbPartition[APP_CFG_USBQ_NUM][APP_CFG_PARTITION_SIZE];  // 5 x 256
+// eeprom
+OS_EVENT        *pEepromQ;
+OS_EVENT        *EromIdleSem, *EromOverSem;
+void            *EepromQTb[APP_CFG_EROMQ_NUM];
 
+// task queue
 OS_EVENT        *pTaskQ;
-
 void            *TaskQTb[APP_CFG_TASKQ_NUM];
 
+// general partition
 OS_MEM          *pTaskPartition;
-
 INT8U           TaskPartition[APP_CFG_TASKQ_NUM][APP_CFG_PARTITION_SIZE];  // 10 x 256
 
 
@@ -189,8 +192,9 @@ static  void  App_TaskStart (void *p_arg)
 
     USB_Bulk_Init();
 
-                                                                /* Create the I2c task.                                */
-    I2cRunSem = OSSemCreate(0);
+                                                                /* I2c related application                              */
+    I2cServerRunSem = OSSemCreate(0);
+    I2cIdleSem = OSSemCreate(1);
     I2cOverSem = OSSemCreate(0);
     I2cTcbMutex = OSMutexCreate(2, &os_err);
 
@@ -200,6 +204,21 @@ static  void  App_TaskStart (void *p_arg)
                     (INT8U    )APP_CFG_TASK_I2C_PRIO,
                     (INT16U   )APP_CFG_TASK_I2C_PRIO,
                     (CPU_STK *)&App_TaskI2cThreadStk[APP_CFG_TASK_STK_SIZE - 1u],
+                    (INT32U   )APP_CFG_TASK_STK_SIZE,
+                    (void    *)0,
+                    (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+                                                                /* eeprom related application                           */
+    pEepromQ = OSQCreate(&EepromQTb[0], APP_CFG_EROMQ_NUM);
+    EromIdleSem = OSSemCreate(1);
+    EromOverSem = OSSemCreate(0);
+
+    OSTaskCreateExt(Eeprom_Thread,
+                    (void    *)0,
+                    (CPU_STK *)&App_TaskEepromThreadStk[0],
+                    (INT8U    )APP_CFG_TASK_EROM_PRIO,
+                    (INT16U   )APP_CFG_TASK_EROM_PRIO,
+                    (CPU_STK *)&App_TaskEepromThreadStk[APP_CFG_TASK_STK_SIZE - 1u],
                     (INT32U   )APP_CFG_TASK_STK_SIZE,
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
@@ -229,14 +248,13 @@ static  void  App_TaskStart (void *p_arg)
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 
-                                                                /* Create the UsbRx task.                                */
-    pUsbMsgQ = OSQCreate(&UsbMsgQTb[0], APP_CFG_USBQ_NUM);
+                                                                /* UsbRx related application.                           */
+    pUsbRxQ = OSQCreate(&UsbRxQTb[0], APP_CFG_USBRXQ_NUM);
 
-    pUsbPartition = OSMemCreate(UsbPartition, APP_CFG_USBQ_NUM, APP_CFG_PARTITION_SIZE, &os_err);
-
-    pTaskQ = OSQCreate(&TaskQTb[0], APP_CFG_TASKQ_NUM);
-
-    pTaskPartition = OSMemCreate(TaskPartition, APP_CFG_TASKQ_NUM, APP_CFG_PARTITION_SIZE, &os_err);
+    pUsbPartition = OSMemCreate(UsbPartition,
+                                APP_CFG_USBRXQ_NUM + APP_CFG_USBRXQ_NUM,
+                                APP_CFG_PARTITION_SIZE,
+                                &os_err);
 
     OSTaskCreateExt(App_TaskUsbRx,
                     (void    *)0,
@@ -248,7 +266,9 @@ static  void  App_TaskStart (void *p_arg)
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 
-                                                                /* Create the UsbTx task.                                */
+                                                                /* UsbTx related application                            */
+    pUsbTxQ = OSQCreate(&UsbTxQTb[0], APP_CFG_USBTXQ_NUM);
+
     OSTaskCreateExt(App_TaskUsbTx,
                     (void    *)0,
                     (CPU_STK *)&App_TaskUsbTxStk[0],
@@ -258,6 +278,10 @@ static  void  App_TaskStart (void *p_arg)
                     (INT32U   )APP_CFG_TASK_USB_STK_SIZE,
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+    pTaskQ = OSQCreate(&TaskQTb[0], APP_CFG_TASKQ_NUM);
+
+    pTaskPartition = OSMemCreate(TaskPartition, APP_CFG_TASKQ_NUM, APP_CFG_PARTITION_SIZE, &os_err);
 
                                                                 /* All tasks should be written as an infinite loop.     */
     while (DEF_TRUE) {

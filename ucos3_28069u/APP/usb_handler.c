@@ -29,24 +29,6 @@ MsgCoding(uint8_t *buffer, const uint8_t *origin, uint8_t origin_len)
     return write_index;
 }
 
-
-#if 0
-INT8U
-App_TaskUsbMsgProcess(void *p_arg)
-{
-    CPU_INT08U  os_err, *ptr;
-                                                                /* Prevent compiler warning for not using 'p_arg'       */
-   (void)&p_arg;
-
-                                                                /* Task body, always written as an infinite loop.       */
-    while (DEF_TRUE) {
-        ptr = (INT8U *)OSQPend( pTaskQ, 0, &os_err );
-        UsbTransmit(ptr);
-    }
-}
-#endif
-
-
 void
 App_TaskUsbRx (void  *p_arg)
 {
@@ -60,7 +42,7 @@ App_TaskUsbRx (void  *p_arg)
     while (DEF_TRUE) {
 
         // wait for usbRx Queue available
-        ptr = (INT8U *)OSQPend( pUsbMsgQ, 0, &os_err);
+        ptr = (INT8U *)OSQPend( pUsbRxQ, 0, &os_err);
 
 
         // 1st byte is length

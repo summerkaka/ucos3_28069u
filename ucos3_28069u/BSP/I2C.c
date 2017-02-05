@@ -13,34 +13,6 @@ __interrupt void i2c_int1a_isr(void);
 
 static Uint16 I2C_err;
 
-#if 0
-// Global variables
-struct I2CMSG g_I2cMsg={I2C_MSGSTAT_INACTIVE,
-						  0,
-						  0,
-                          0x0000,
-                          0x0000,
-						  0x0000,
-						  0x0000,
-						 };
-
-void I2cMsg_Reset(void)
-{
-    Uint16 i = 0;
-    g_I2cMsg.ErrNum = 0;
-    g_I2cMsg.NackNum = 0;
-    g_I2cMsg.DevAddr = 0;
-    g_I2cMsg.RegAddr.all = 0;
-    g_I2cMsg.LongRegAddrFlag = 0;
-    g_I2cMsg.Status = I2C_MSGSTAT_INACTIVE;
-    g_I2cMsg.Len = 0;
-    g_I2cMsg.pBuf = I2cBuffer;
-    for (i=0; i < I2C_MAX_BUFFER_SIZE; i++){
-        g_I2cMsg.pBuf[i] = 0;
-    }
-}
-#endif
-
 struct I2CMSG *g_pI2cMsg;
 Uint16 I2cBuffer[I2C_MAX_BUFFER_SIZE];
 
@@ -49,13 +21,14 @@ StartI2cTask(struct I2CMSG *tcb)
 {
     INT8U os_err;
 
-    OSSemPend(I2cOverSem, 0, &os_err);
+    OS_SEM_DATA i2csem; // make sure I2c thread is idle again just for protection
+    OSSemQuery(I2cIdleSem, &i2csem);
+    if (!i2csem.OSCnt)
+        return;
 
     OSMutexPend(I2cTcbMutex, 0, &os_err);
     g_pI2cMsg = tcb;
     OSMutexPost(I2cTcbMutex);
-
-    OSSemPost(I2cRunSem);
 }
 
 void I2c_Init(void)
@@ -128,12 +101,14 @@ I2c_Thread(void *p_arg)
 	(void)&p_arg;
 
     while (DEF_TRUE) {
-	    OSSemPend(I2cRunSem,
+	    OSSemPend(I2cServerRunSem,
 	              0,
 	              &os_err);
 
-	    if (!I2c_Server())            // return I2C_MSGSTAT_INACTIVE
+	    if (!I2c_Server()) {            // return I2C_MSGSTAT_INACTIVE
 	        OSSemPost(I2cOverSem);
+	        OSSemPost(I2cIdleSem);
+	    }
 	}
 }
 
@@ -255,6 +230,6 @@ __interrupt void i2c_int1a_isr(void)     // I2C-A
     BSP_IntEn(BSP_INT_ID_INT8_1);
     OSIntExit();
 
-    OSSemPost(I2cRunSem);
+    OSSemPost(I2cServerRunSem);
 }
 

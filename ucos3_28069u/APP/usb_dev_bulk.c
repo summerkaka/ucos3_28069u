@@ -157,7 +157,7 @@ MsgHandler(tUSBDBulkDevice *psDevice, uint8_t *pcData,
 
                 memcpy(ptr + 1, UsbRxBuffer.Buffer, UsbRxBuffer.WriteIndex);  // copy msg to partition
 
-                OSQPost(pUsbMsgQ, (void*)ptr);                  // post os_msg queue
+                OSQPost(pUsbRxQ, (void*)ptr);                  // post os_msg queue
 
                 MsgIndex = 0;
                 HeaderFlag = false;
