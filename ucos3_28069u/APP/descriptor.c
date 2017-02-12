@@ -16,7 +16,6 @@ descriptor_handler(tMSG *cmd)
 {
     INT8U os_err;
     INT8U *mem_ptr;
-    OS_EVENT *eromsem = OSSemCreate(0);
     tEepromTask erom_ops;
 
     erom_ops.length = cmd->Buffer[1];
@@ -27,17 +26,17 @@ descriptor_handler(tMSG *cmd)
         memcpy(erom_ops.buffer, &cmd->Buffer[5], erom_ops.length);
     }
 
-    mem_ptr = OSMemGet(pPartition256, &os_err);        // apply partition
+    mem_ptr = OSMemGet(pPartition256, &os_err);         // apply partition
 
     memcpy(mem_ptr, &erom_ops, sizeof(tEepromTask));    // copy msg to partition
 
-    OSSemPend(EromIdleSem, 0, &os_err);             // wait for eeprom idle
+    OSSemPend(EromIdleSem, 0, &os_err);                 // wait for eeprom idle
 
     OSQPost(pEepromQ, (void*)mem_ptr);                  // post os_msg queue
 
-    OSSemPend(EromOverSem, 0, &os_err);             // wait for eeprom r/w finish
+    OSSemPend(EromOverSem, 0, &os_err);                 // wait for eeprom r/w finish
 
-    OSMemPut(pPartition256, (void *)mem_ptr);          // return partition
-    //todo
+    OSMemPut(pPartition256, (void *)mem_ptr);           // return partition
+
     return 0;
 }

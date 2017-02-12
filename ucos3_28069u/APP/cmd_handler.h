@@ -21,7 +21,7 @@ typedef struct {
     Uint8      buffer[128];  // no larger than eeprom bank size
 } tEepromTask;
 
-void Eeprom_Thread(void *p_arg);
 
+void App_CmdHandler(void *p_arg);
 
 #endif /* APP_CMD_HANDLER_H_ */

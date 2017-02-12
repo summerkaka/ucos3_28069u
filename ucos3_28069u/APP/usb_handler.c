@@ -33,8 +33,8 @@ void
 App_TaskUsbRx (void  *p_arg)
 {
     CPU_INT08U  os_err;
-    INT8U *cmd, *msgq_ptr, *msg_header, length, i, writeindex;
-    INT8U buffer[BULK_BUFFER_SIZE];
+    INT8U *msgq_ptr, *msg_header, length, readindex, writeindex;
+    INT8U *buffer;
                                                                 /* Prevent compiler warning for not using 'p_arg'       */
    (void)&p_arg;
 
@@ -44,41 +44,41 @@ App_TaskUsbRx (void  *p_arg)
         // wait for usbRx Queue available
         msgq_ptr = (INT8U *)OSQPend( pUsbRxQ, 0, &os_err);
 
-
         // 1st byte is length
-        length = *msgq_ptr - 4;
+        length = *msgq_ptr - 4;     // remove sof & eof
+
+        if (length > BULK_BUFFER_SIZE) {
+            OSMemPut(pPartition256, (void *)msgq_ptr);
+            continue;
+        }
+
+        // buffer for decoding message
+        buffer = OSMemGet(pPartition256, &os_err);
 
         // 3rd byte is tMSG header
         msg_header = msgq_ptr + 3;  // length, 0x10, 0x02, ...
 
         // store the usb msg to local buffer, decode CAN29 DLE
-        i = 0;
-        writeindex = 0;
-        while(length--) {
-            buffer[writeindex] = *(msg_header + i++);
+        readindex = writeindex = 0;
+        while(readindex <= length) {
+            buffer[writeindex] = *(msg_header + readindex++);
             if (buffer[writeindex] == 0x10) {
-                if(*(msg_header + i) == 0x10) { // 0x10 0x10
-                    i++;
-                    length--;
-                }else if (*(msg_header + i) == 0x0D) { // 0x10 0x0d
+                if(*(msg_header + readindex) == 0x10) { // 0x10 0x10
+                    readindex++;
+                }else if (*(msg_header + readindex) == 0x0D) { // 0x10 0x0d
                     buffer[writeindex] = 0x0D;
-                    i++;
-                    length--;
-                }else if (*(msg_header + i + 1) != 0x02 && *(msg_header + i + 1) != 0x03) {
-                    //todo send error report;   //msg has error, directly return
+                    readindex++;
+                }else if (*(msg_header + readindex + 1) != 0x02 && *(msg_header + readindex + 1) != 0x03) {
+                    // msg has error, directly return
+                    OSMemPut(pPartition256, (void *)msgq_ptr);
+                    continue;
                 }
             }
-            writeindex = (++writeindex == BULK_BUFFER_SIZE) ? 0 : writeindex; // prevent overflow
+            writeindex++;
         }
 
-        // assign memory for task ongoing
-        cmd = OSMemGet(pPartition256, &os_err);
-
-        // copy data to this memory
-        memcpy(cmd, buffer, i);
-
         // post TaskQueue
-        OSQPost(pTaskQ, (void*)cmd);
+        OSQPost(pTaskQ, (void*)buffer);
 
         // return memory of UsbRx
         OSMemPut(pPartition256, (void *)msgq_ptr);
@@ -99,12 +99,12 @@ App_TaskUsbTx (void  *p_arg)
 
                                                                 /* Task body, always written as an infinite loop.       */
     while (DEF_TRUE) {
-        msg = (tMSG *)OSQPend( pTaskQ, 0, &os_err );
+        msg = (tMSG *)OSQPend( pUsbTxQ, 0, &os_err );
         buffer[0] = 0x10;
         buffer[1] = 0x02;
-        length = MsgCoding((uint8_t *)(buffer + 2), (const uint8_t *)msg, msg->Length + 5) + 2;
-        buffer[length++] = 0x10;
-        buffer[length++] = 0x03;
+        length = MsgCoding((uint8_t *)(buffer + 2), (const uint8_t *)msg, msg->Length + 5) + 4;  // +4 is for all data with sof & eof
+        buffer[length - 2] = 0x10;
+        buffer[length - 1] = 0x03;
 #if DEBUG
         buffer[length++] = msg->Length;
         buffer[length++] = (uint32_t)msg >> 24;

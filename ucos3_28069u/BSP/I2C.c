@@ -23,12 +23,18 @@ StartI2cTask(struct I2CMSG *tcb)
 
     OS_SEM_DATA i2csem; // make sure I2c thread is idle again just for protection
     OSSemQuery(I2cIdleSem, &i2csem);
+    BSP_LED_On(BSP_LED_LD2);
     if (!i2csem.OSCnt)
         return;
+
+
 
     OSMutexPend(I2cTcbMutex, 0, &os_err);
     g_pI2cMsg = tcb;
     OSMutexPost(I2cTcbMutex);
+
+
+    OSSemPost(I2cServerRunSem);
 }
 
 void I2c_Init(void)

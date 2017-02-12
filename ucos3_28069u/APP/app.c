@@ -69,10 +69,11 @@
 CPU_STK_SIZE  App_TaskStartStk[APP_CFG_TASK_STK_SIZE];      /* Start Task's stack.            */
 CPU_STK_SIZE  App_TaskPendStk[APP_CFG_TASK_STK_SIZE];       /* Ping Task's stack.             */
 CPU_STK_SIZE  App_TaskPostStk[APP_CFG_TASK_STK_SIZE];       /* Pong Task's stack.             */
-CPU_STK_SIZE  App_TaskI2cThreadStk[APP_CFG_TASK_STK_SIZE];      // i2c
-CPU_STK_SIZE  App_TaskEepromThreadStk[APP_CFG_TASK_STK_SIZE];   // eeprom
-CPU_STK_SIZE  App_TaskUsbRxStk[APP_CFG_TASK_USB_STK_SIZE];      // usbtx
-CPU_STK_SIZE  App_TaskUsbTxStk[APP_CFG_TASK_USB_STK_SIZE];      // usbrx
+CPU_STK_SIZE  I2cThread_Stk[APP_CFG_TASK_STK_SIZE];         // i2c
+CPU_STK_SIZE  EepromThread_Stk[APP_CFG_TASK_STK_SIZE];      // eeprom
+CPU_STK_SIZE  App_UsbRx_Stk[APP_CFG_TASK_USB_STK_SIZE];     // usbtx
+CPU_STK_SIZE  App_UsbTx_Stk[APP_CFG_TASK_USB_STK_SIZE];     // usbrx
+CPU_STK_SIZE  App_CmdHandler_Stk[APP_CFG_TASK_USB_STK_SIZE];    // App_CmdHandler
 
 OS_EVENT        *AppTaskObjSem;
 
@@ -200,10 +201,10 @@ static  void  App_TaskStart (void *p_arg)
 
     OSTaskCreateExt(I2c_Thread,
                     (void    *)0,
-                    (CPU_STK *)&App_TaskI2cThreadStk[0],
+                    (CPU_STK *)&I2cThread_Stk[0],
                     (INT8U    )APP_CFG_TASK_I2C_PRIO,
                     (INT16U   )APP_CFG_TASK_I2C_PRIO,
-                    (CPU_STK *)&App_TaskI2cThreadStk[APP_CFG_TASK_STK_SIZE - 1u],
+                    (CPU_STK *)&I2cThread_Stk[APP_CFG_TASK_STK_SIZE - 1u],
                     (INT32U   )APP_CFG_TASK_STK_SIZE,
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
@@ -215,16 +216,16 @@ static  void  App_TaskStart (void *p_arg)
 
     OSTaskCreateExt(Eeprom_Thread,
                     (void    *)0,
-                    (CPU_STK *)&App_TaskEepromThreadStk[0],
+                    (CPU_STK *)&EepromThread_Stk[0],
                     (INT8U    )APP_CFG_TASK_EROM_PRIO,
                     (INT16U   )APP_CFG_TASK_EROM_PRIO,
-                    (CPU_STK *)&App_TaskEepromThreadStk[APP_CFG_TASK_STK_SIZE - 1u],
+                    (CPU_STK *)&EepromThread_Stk[APP_CFG_TASK_STK_SIZE - 1u],
                     (INT32U   )APP_CFG_TASK_STK_SIZE,
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 
 
-                                                                /* Create the Ping task.                                */
+                                                                /* Create the Ping task.                           */
     AppTaskObjSem = OSSemCreate(0);
 
     OSTaskCreateExt(App_TaskPing,
@@ -237,7 +238,7 @@ static  void  App_TaskStart (void *p_arg)
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 
-                                                                /* Create the Pong task.                                */
+                                                                /* Create the Pong task.                            */
     OSTaskCreateExt(App_TaskPong,
                     (void    *)0,
                     (CPU_STK *)&App_TaskPostStk[0],
@@ -248,28 +249,40 @@ static  void  App_TaskStart (void *p_arg)
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 
-                                                                /* UsbRx related application.                           */
+                                                                /* UsbRx related application.                        */
     pUsbRxQ = OSQCreate(&UsbRxQTb[0], APP_CFG_USBRXQ_NUM);
 
     OSTaskCreateExt(App_TaskUsbRx,
                     (void    *)0,
-                    (CPU_STK *)&App_TaskUsbRxStk[0],
+                    (CPU_STK *)&App_UsbRx_Stk[0],
                     (INT8U    )APP_CFG_TASK_USBRX_PRIO,
                     (INT16U   )APP_CFG_TASK_USBRX_PRIO,
-                    (CPU_STK *)&App_TaskUsbRxStk[APP_CFG_TASK_USB_STK_SIZE - 1u],
+                    (CPU_STK *)&App_UsbRx_Stk[APP_CFG_TASK_USB_STK_SIZE - 1u],
                     (INT32U   )APP_CFG_TASK_USB_STK_SIZE,
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 
-                                                                /* UsbTx related application                            */
+                                                                /* UsbTx related application                          */
     pUsbTxQ = OSQCreate(&UsbTxQTb[0], APP_CFG_USBTXQ_NUM);
 
     OSTaskCreateExt(App_TaskUsbTx,
                     (void    *)0,
-                    (CPU_STK *)&App_TaskUsbTxStk[0],
+                    (CPU_STK *)&App_UsbTx_Stk[0],
                     (INT8U    )APP_CFG_TASK_USBTX_PRIO,
                     (INT16U   )APP_CFG_TASK_USBTX_PRIO,
-                    (CPU_STK *)&App_TaskUsbTxStk[APP_CFG_TASK_USB_STK_SIZE - 1u],
+                    (CPU_STK *)&App_UsbTx_Stk[APP_CFG_TASK_USB_STK_SIZE - 1u],
+                    (INT32U   )APP_CFG_TASK_USB_STK_SIZE,
+                    (void    *)0,
+                    (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+
+                                                                /* cmd-handler related application                     */
+    OSTaskCreateExt(App_CmdHandler,
+                    (void    *)0,
+                    (CPU_STK *)&App_CmdHandler_Stk[0],
+                    (INT8U    )APP_CFG_TASK_CMDHANDLER_PRIO,
+                    (INT16U   )APP_CFG_TASK_CMDHANDLER_PRIO,
+                    (CPU_STK *)&App_CmdHandler_Stk[APP_CFG_TASK_USB_STK_SIZE - 1u],
                     (INT32U   )APP_CFG_TASK_USB_STK_SIZE,
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));

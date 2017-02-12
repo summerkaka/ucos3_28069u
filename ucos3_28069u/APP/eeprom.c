@@ -39,6 +39,7 @@ Eeprom_Thread(void *p_arg)
         }
 
         StartI2cTask(&i2ctcb);
+
         OSSemPend(I2cOverSem, 0, &os_err);  // wait for i2c operate finish
 
         OSSemPost(EromOverSem);

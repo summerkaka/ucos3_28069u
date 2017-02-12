@@ -65,7 +65,7 @@ __error__(char *pcFilename, uint32_t ulLine)
 uint8_t MsgIndex = 0;
 bool HeaderFlag = false;
 bool DLEflag = false;
-UsbRingBuf UsbRxBuffer;
+//UsbRingBuf UsbRxBuffer;
 
 void
 USB_Init(void)
@@ -87,6 +87,7 @@ USB_Bulk_Init(void)
     //UARTprintf("Waiting for host...\n");
 }
 
+#if 0
 static void
 UsbRingBufInit(void)
 {
@@ -97,6 +98,7 @@ UsbRingBufInit(void)
     //for (i = 0; i < BULK_BUFFER_SIZE; i++)
         //UsbRxBuffer.Buffer[i] = 0;
 }
+#endif
 
 
 /* ****************************************************************************
@@ -109,7 +111,7 @@ MsgHandler(tUSBDBulkDevice *psDevice, uint8_t *pcData,
     uint32_t ulLoop = ulNumBytes;
     uint32_t ulCount = ulLoop;
     uint32_t ulReadIndex = (uint32_t)(pcData - g_pui8USBRxBuffer);
-    INT8U os_err, *ptr;
+    INT8U os_err, write_index, *buffer;
 
     if (ulReadIndex > 255)
         return ulCount;
@@ -137,31 +139,28 @@ MsgHandler(tUSBDBulkDevice *psDevice, uint8_t *pcData,
     }
 
     if (HeaderFlag) {
+        buffer = OSMemGet(pPartition256, &os_err);         // allocate memory to store usb msg
+        write_index = 1;
+
         while (ulLoop--) {
-            UsbRxBuffer.Buffer[UsbRxBuffer.WriteIndex++] = g_pui8USBRxBuffer[ulReadIndex++];
+            buffer[write_index++] = g_pui8USBRxBuffer[ulReadIndex++];
             ulReadIndex = (ulReadIndex == BULK_BUFFER_SIZE) ? 0 : ulReadIndex;
         }
-        if (UsbRxBuffer.WriteIndex > 255) {
+        if (write_index > 255) {
             MsgIndex = 0;
             HeaderFlag = false;
-            UsbRingBufInit();
             return ulCount;
         }
-        if (UsbRxBuffer.Buffer[UsbRxBuffer.WriteIndex-2] == 0x10 && UsbRxBuffer.Buffer[UsbRxBuffer.WriteIndex-1] == 0x03) {
-            if ( UsbRxBuffer.Buffer[UsbRxBuffer.WriteIndex-3] != 0x10 ||
-                    (UsbRxBuffer.Buffer[UsbRxBuffer.WriteIndex-3] == 0x10 && UsbRxBuffer.Buffer[UsbRxBuffer.WriteIndex-4] == 0x10) ) {
+        if (buffer[write_index - 2] == 0x10 && buffer[write_index - 1] == 0x03) {
+            //todo use counter to judge eof
+            if ( buffer[write_index - 3] != 0x10 ||
+                    (buffer[write_index - 3] == 0x10 && buffer[write_index - 4] == 0x10) ) {
+                buffer[0] = write_index;                  // 1st byte is the data length
 
-                ptr = OSMemGet(pPartition256, &os_err);         // allocate memory to store usb msg
-
-                *ptr = UsbRxBuffer.WriteIndex;                  // 1st byte is the data length
-
-                memcpy(ptr + 1, UsbRxBuffer.Buffer, UsbRxBuffer.WriteIndex);  // copy msg to partition
-
-                OSQPost(pUsbRxQ, (void*)ptr);                  // post os_msg queue
+                OSQPost(pUsbRxQ, (void*)buffer);                  // post os_msg queue
 
                 MsgIndex = 0;
                 HeaderFlag = false;
-                UsbRingBufInit();
             }
         }else {
             MsgIndex++;
