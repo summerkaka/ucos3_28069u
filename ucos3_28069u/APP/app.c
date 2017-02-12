@@ -83,12 +83,8 @@ OS_EVENT        *I2cTcbMutex;
 // usb msg queue
 OS_EVENT        *pUsbRxQ;
 OS_EVENT        *pUsbTxQ;
-void            *UsbRxQTb[APP_CFG_USBTXQ_NUM];
-void            *UsbTxQTb[APP_CFG_USBRXQ_NUM];
-
-// usb msg partition
-OS_MEM          *pUsbPartition;
-INT8U           UsbPartition[APP_CFG_USBRXQ_NUM + APP_CFG_USBTXQ_NUM][APP_CFG_PARTITION_SIZE];  // 5 x 256
+void            *UsbRxQTb[APP_CFG_USBRXQ_NUM];
+void            *UsbTxQTb[APP_CFG_USBTXQ_NUM];
 
 // eeprom
 OS_EVENT        *pEepromQ;
@@ -100,8 +96,12 @@ OS_EVENT        *pTaskQ;
 void            *TaskQTb[APP_CFG_TASKQ_NUM];
 
 // general partition
-OS_MEM          *pTaskPartition;
-INT8U           TaskPartition[APP_CFG_TASKQ_NUM][APP_CFG_PARTITION_SIZE];  // 10 x 256
+OS_MEM          *pPartition32;
+INT8U           Partition32[APP_CFG_PARTITION32_NUM][APP_CFG_PARTITION32_SIZE];  // 10 x 32
+
+// size-256 partition
+OS_MEM          *pPartition256;
+INT8U           Partition256[APP_CFG_PARTITION256_NUM][APP_CFG_PARTITION256_SIZE];  // 3 x 256
 
 
 /*
@@ -251,11 +251,6 @@ static  void  App_TaskStart (void *p_arg)
                                                                 /* UsbRx related application.                           */
     pUsbRxQ = OSQCreate(&UsbRxQTb[0], APP_CFG_USBRXQ_NUM);
 
-    pUsbPartition = OSMemCreate(UsbPartition,
-                                APP_CFG_USBRXQ_NUM + APP_CFG_USBRXQ_NUM,
-                                APP_CFG_PARTITION_SIZE,
-                                &os_err);
-
     OSTaskCreateExt(App_TaskUsbRx,
                     (void    *)0,
                     (CPU_STK *)&App_TaskUsbRxStk[0],
@@ -279,9 +274,10 @@ static  void  App_TaskStart (void *p_arg)
                     (void    *)0,
                     (INT16U   )(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 
+                                                                /* general initial.                                    */
     pTaskQ = OSQCreate(&TaskQTb[0], APP_CFG_TASKQ_NUM);
-
-    pTaskPartition = OSMemCreate(TaskPartition, APP_CFG_TASKQ_NUM, APP_CFG_PARTITION_SIZE, &os_err);
+    pPartition32 = OSMemCreate(Partition32, APP_CFG_PARTITION32_NUM, APP_CFG_PARTITION32_SIZE, &os_err);
+    pPartition256 = OSMemCreate(Partition256, APP_CFG_PARTITION256_NUM, APP_CFG_PARTITION256_SIZE, &os_err);
 
                                                                 /* All tasks should be written as an infinite loop.     */
     while (DEF_TRUE) {

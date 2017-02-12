@@ -76,12 +76,22 @@
 *                                            MEMORY PARTITION SIZES
 *********************************************************************************************************
 */
+#define  APP_CFG_PARTITION32_SIZE                    32u
+#define  APP_CFG_PARTITION32_NUM                     32u
 
-#define  APP_CFG_PARTITION_SIZE                     256u
+#define  APP_CFG_PARTITION256_SIZE                  256u
+#define  APP_CFG_PARTITION256_NUM                     5u
+
+
+/*
+*********************************************************************************************************
+*                                            MESSAGE Queue NUMBER
+*********************************************************************************************************
+*/
 #define  APP_CFG_USBRXQ_NUM                           5u
 #define  APP_CFG_USBTXQ_NUM                           5u
-#define  APP_CFG_EROMQ_NUM                           10u
-#define  APP_CFG_TASKQ_NUM                           50u
+#define  APP_CFG_EROMQ_NUM                            5u
+#define  APP_CFG_TASKQ_NUM                           32u
 
 
 /*

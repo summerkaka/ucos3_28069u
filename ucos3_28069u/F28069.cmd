@@ -149,7 +149,7 @@ SECTIONS
 
    /* Allocate uninitalized data sections: */
    .stack              : > RAMM1,      PAGE = 1
-   .ebss               : >> RAML3 | RAML4 | RAML5 | RAML6,      PAGE = 1
+   .ebss               : >> RAML3 | RAML4 | RAML5 | RAML6 | RAML7 | RAML8,      PAGE = 1
    .esysmem            : > RAML2,      PAGE = 1
 
    /* Initalized sections to go in Flash */

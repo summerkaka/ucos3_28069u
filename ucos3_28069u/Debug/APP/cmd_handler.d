@@ -76,6 +76,9 @@ APP/cmd_handler.obj: ../APP/usb_bulk_structs.h
 APP/cmd_handler.obj: ../APP/usb_dev_bulk.h
 APP/cmd_handler.obj: ../APP/usb_handler.h
 APP/cmd_handler.obj: ../APP/cmd_handler.h
+APP/cmd_handler.obj: ../APP/changer.h
+APP/cmd_handler.obj: ../APP/descriptor.h
+APP/cmd_handler.obj: ../APP/eeprom.h
 APP/cmd_handler.obj: /Volumes/UDISK/ucos3_28069u/ucos3_28069u/BSP/I2C.h
 
 ../APP/cmd_handler.c: 
@@ -154,4 +157,7 @@ APP/cmd_handler.obj: /Volumes/UDISK/ucos3_28069u/ucos3_28069u/BSP/I2C.h
 ../APP/usb_dev_bulk.h: 
 ../APP/usb_handler.h: 
 ../APP/cmd_handler.h: 
+../APP/changer.h: 
+../APP/descriptor.h: 
+../APP/eeprom.h: 
 /Volumes/UDISK/ucos3_28069u/ucos3_28069u/BSP/I2C.h: 

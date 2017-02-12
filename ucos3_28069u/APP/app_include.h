@@ -45,6 +45,9 @@
 #include "usb_dev_bulk.h"
 #include "usb_handler.h"
 #include "cmd_handler.h"
+#include "changer.h"
+#include "descriptor.h"
+#include "eeprom.h"
 
 #include "BSP/I2C.h"
 

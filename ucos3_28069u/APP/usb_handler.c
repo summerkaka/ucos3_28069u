@@ -33,7 +33,7 @@ void
 App_TaskUsbRx (void  *p_arg)
 {
     CPU_INT08U  os_err;
-    INT8U *cmd, *ptr, *msg_header, length, i, writeindex;
+    INT8U *cmd, *msgq_ptr, *msg_header, length, i, writeindex;
     INT8U buffer[BULK_BUFFER_SIZE];
                                                                 /* Prevent compiler warning for not using 'p_arg'       */
    (void)&p_arg;
@@ -42,14 +42,14 @@ App_TaskUsbRx (void  *p_arg)
     while (DEF_TRUE) {
 
         // wait for usbRx Queue available
-        ptr = (INT8U *)OSQPend( pUsbRxQ, 0, &os_err);
+        msgq_ptr = (INT8U *)OSQPend( pUsbRxQ, 0, &os_err);
 
 
         // 1st byte is length
-        length = *ptr - 4;
+        length = *msgq_ptr - 4;
 
         // 3rd byte is tMSG header
-        msg_header = ptr + 3;  // length, 0x10, 0x02, ...
+        msg_header = msgq_ptr + 3;  // length, 0x10, 0x02, ...
 
         // store the usb msg to local buffer, decode CAN29 DLE
         i = 0;
@@ -72,7 +72,7 @@ App_TaskUsbRx (void  *p_arg)
         }
 
         // assign memory for task ongoing
-        cmd = OSMemGet(pTaskPartition, &os_err);
+        cmd = OSMemGet(pPartition256, &os_err);
 
         // copy data to this memory
         memcpy(cmd, buffer, i);
@@ -81,7 +81,7 @@ App_TaskUsbRx (void  *p_arg)
         OSQPost(pTaskQ, (void*)cmd);
 
         // return memory of UsbRx
-        OSMemPut(pUsbPartition, (void *)ptr);
+        OSMemPut(pPartition256, (void *)msgq_ptr);
     }
 }
 
@@ -116,7 +116,7 @@ App_TaskUsbTx (void  *p_arg)
             USBBufferInfoGet(&g_sTxBuffer, &sTxRing);
             ulSpace = USBBufferSpaceAvailable(&g_sTxBuffer);
             if (ulSpace >= length) {  // check if space available
-                OSMemPut(pTaskPartition, (void *)msg);
+                OSMemPut(pPartition256, (void *)msg);
                 break;
             }
             OSTimeDlyHMSM(0, 0, 1, 0);

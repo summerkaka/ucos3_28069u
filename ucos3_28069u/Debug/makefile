@@ -9,7 +9,10 @@ GEN_CMDS__FLAG :=
 
 ORDERED_OBJS += \
 "./APP/app.obj" \
+"./APP/changer.obj" \
 "./APP/cmd_handler.obj" \
+"./APP/descriptor.obj" \
+"./APP/eeprom.obj" \
 "./APP/usb_bulk_structs.obj" \
 "./APP/usb_dev_bulk.obj" \
 "./APP/usb_handler.obj" \
@@ -211,8 +214,9 @@ ucos3_28069u.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "APP/app.obj" "APP/cmd_handler.obj" "APP/usb_bulk_structs.obj" "APP/usb_dev_bulk.obj" "APP/usb_handler.obj" "BSP/CCS/bsp_start.obj" "BSP/I2C.obj" "BSP/bsp.obj" "BSP/bsp_int.obj" "BSP/bsp_led.obj" "BSP/cpu_bsp.obj" "BSP/OS/uCOS-II/bsp_os.obj" "lib/F2806x_GlobalVariableDefs.obj" "lib/sysctl.obj" "lib/uartstdio.obj" "lib/usb.obj" "lib/usb_hal.obj" "uC-CPU/C28x/CCS/cpu_a.obj" "uC-CPU/C28x/CCS/cpu_c.obj" "uC-CPU/cpu_core.obj" "uC-LIB/lib_ascii.obj" "uC-LIB/lib_math.obj" "uC-LIB/lib_mem.obj" "uC-LIB/lib_str.obj" "uCOS-II/Ports/C28x/Generic/CCS/os_cpu_a.obj" "uCOS-II/Ports/C28x/Generic/CCS/os_cpu_c.obj" "uCOS-II/Ports/C28x/Generic/CCS/os_cpu_i.obj" "uCOS-II/Ports/C28x/Generic/CCS/os_dbg.obj" "uCOS-II/Source/os_core.obj" "uCOS-II/Source/os_flag.obj" "uCOS-II/Source/os_mbox.obj" "uCOS-II/Source/os_mem.obj" "uCOS-II/Source/os_mutex.obj" "uCOS-II/Source/os_q.obj" "uCOS-II/Source/os_sem.obj" "uCOS-II/Source/os_task.obj" "uCOS-II/Source/os_time.obj" "uCOS-II/Source/os_tmr.obj" 
-	-$(RM) "APP/app.d" "APP/cmd_handler.d" "APP/usb_bulk_structs.d" "APP/usb_dev_bulk.d" "APP/usb_handler.d" "BSP/I2C.d" "BSP/bsp.d" "BSP/bsp_int.d" "BSP/bsp_led.d" "BSP/cpu_bsp.d" "BSP/OS/uCOS-II/bsp_os.d" "lib/F2806x_GlobalVariableDefs.d" "lib/sysctl.d" "lib/uartstdio.d" "lib/usb.d" "lib/usb_hal.d" "uC-CPU/C28x/CCS/cpu_c.d" "uC-CPU/cpu_core.d" "uC-LIB/lib_ascii.d" "uC-LIB/lib_math.d" "uC-LIB/lib_mem.d" "uC-LIB/lib_str.d" "uCOS-II/Ports/C28x/Generic/CCS/os_cpu_c.d" "uCOS-II/Ports/C28x/Generic/CCS/os_dbg.d" "uCOS-II/Source/os_core.d" "uCOS-II/Source/os_flag.d" "uCOS-II/Source/os_mbox.d" "uCOS-II/Source/os_mem.d" "uCOS-II/Source/os_mutex.d" "uCOS-II/Source/os_q.d" "uCOS-II/Source/os_sem.d" "uCOS-II/Source/os_task.d" "uCOS-II/Source/os_time.d" "uCOS-II/Source/os_tmr.d" 
+	-$(RM) "APP/app.obj" "APP/changer.obj" "APP/cmd_handler.obj" "APP/descriptor.obj" "APP/eeprom.obj" "APP/usb_bulk_structs.obj" "APP/usb_dev_bulk.obj" "APP/usb_handler.obj" "BSP/CCS/bsp_start.obj" "BSP/I2C.obj" "BSP/bsp.obj" "BSP/bsp_int.obj" "BSP/bsp_led.obj" "BSP/cpu_bsp.obj" "BSP/OS/uCOS-II/bsp_os.obj" "lib/F2806x_GlobalVariableDefs.obj" "lib/sysctl.obj" "lib/uartstdio.obj" "lib/usb.obj" "lib/usb_hal.obj" "uC-CPU/C28x/CCS/cpu_a.obj" "uC-CPU/C28x/CCS/cpu_c.obj" "uC-CPU/cpu_core.obj" "uC-LIB/lib_ascii.obj" "uC-LIB/lib_math.obj" "uC-LIB/lib_mem.obj" "uC-LIB/lib_str.obj" "uCOS-II/Ports/C28x/Generic/CCS/os_cpu_a.obj" "uCOS-II/Ports/C28x/Generic/CCS/os_cpu_c.obj" "uCOS-II/Ports/C28x/Generic/CCS/os_cpu_i.obj" "uCOS-II/Ports/C28x/Generic/CCS/os_dbg.obj" "uCOS-II/Source/os_core.obj" "uCOS-II/Source/os_flag.obj" "uCOS-II/Source/os_mbox.obj" "uCOS-II/Source/os_mem.obj" "uCOS-II/Source/os_mutex.obj" "uCOS-II/Source/os_q.obj" "uCOS-II/Source/os_sem.obj" "uCOS-II/Source/os_task.obj" "uCOS-II/Source/os_time.obj" 
+	-$(RM) "uCOS-II/Source/os_tmr.obj" 
+	-$(RM) "APP/app.d" "APP/changer.d" "APP/cmd_handler.d" "APP/descriptor.d" "APP/eeprom.d" "APP/usb_bulk_structs.d" "APP/usb_dev_bulk.d" "APP/usb_handler.d" "BSP/I2C.d" "BSP/bsp.d" "BSP/bsp_int.d" "BSP/bsp_led.d" "BSP/cpu_bsp.d" "BSP/OS/uCOS-II/bsp_os.d" "lib/F2806x_GlobalVariableDefs.d" "lib/sysctl.d" "lib/uartstdio.d" "lib/usb.d" "lib/usb_hal.d" "uC-CPU/C28x/CCS/cpu_c.d" "uC-CPU/cpu_core.d" "uC-LIB/lib_ascii.d" "uC-LIB/lib_math.d" "uC-LIB/lib_mem.d" "uC-LIB/lib_str.d" "uCOS-II/Ports/C28x/Generic/CCS/os_cpu_c.d" "uCOS-II/Ports/C28x/Generic/CCS/os_dbg.d" "uCOS-II/Source/os_core.d" "uCOS-II/Source/os_flag.d" "uCOS-II/Source/os_mbox.d" "uCOS-II/Source/os_mem.d" "uCOS-II/Source/os_mutex.d" "uCOS-II/Source/os_q.d" "uCOS-II/Source/os_sem.d" "uCOS-II/Source/os_task.d" "uCOS-II/Source/os_time.d" "uCOS-II/Source/os_tmr.d" 
 	-$(RM) "BSP/CCS/bsp_start.d" "uC-CPU/C28x/CCS/cpu_a.d" "uCOS-II/Ports/C28x/Generic/CCS/os_cpu_a.d" "uCOS-II/Ports/C28x/Generic/CCS/os_cpu_i.d" 
 	-@echo 'Finished clean'
 	-@echo ' '

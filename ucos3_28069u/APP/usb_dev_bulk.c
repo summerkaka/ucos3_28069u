@@ -151,7 +151,7 @@ MsgHandler(tUSBDBulkDevice *psDevice, uint8_t *pcData,
             if ( UsbRxBuffer.Buffer[UsbRxBuffer.WriteIndex-3] != 0x10 ||
                     (UsbRxBuffer.Buffer[UsbRxBuffer.WriteIndex-3] == 0x10 && UsbRxBuffer.Buffer[UsbRxBuffer.WriteIndex-4] == 0x10) ) {
 
-                ptr = OSMemGet(pUsbPartition, &os_err);         // allocate memory to store usb msg
+                ptr = OSMemGet(pPartition256, &os_err);         // allocate memory to store usb msg
 
                 *ptr = UsbRxBuffer.WriteIndex;                  // 1st byte is the data length
 

@@ -71,10 +71,13 @@
 #define I2C_MSGSTAT_INACTIVE          0x0000
 #define I2C_MSGSTAT_SEND_WITHSTOP     0x0010
 #define I2C_MSGSTAT_WRITE_BUSY        0x0011
+#define I2C_MSGSTAT_WRITE_ERR         0x001A
 #define I2C_MSGSTAT_SEND_NOSTOP       0x0020
 #define I2C_MSGSTAT_SEND_NOSTOP_BUSY  0x0021
 #define I2C_MSGSTAT_RESTART           0x0022
 #define I2C_MSGSTAT_READ_BUSY         0x0023
+#define I2C_MSGSTAT_READ_ERR          0x002A
+#define I2C_MSGSTAT_NACK_ERR          0x0030
 
 // Generic defines
 #define I2C_TRUE  1
@@ -113,8 +116,8 @@ struct I2CMSG {
   union UWD RegAddr;
   Uint16 LongRegAddrFlag;
   Uint16 Len;            // Num of valid bytes in (or to be put in MsgBuffer)
-  Uint16 *pBuf;   		 // Array holding msg data - max that
-  Uint16 *pData;
+  Uint8  *pBuf;   		 // Array holding msg data - max that
+  Uint8  *pData;
 };
 
 #endif  // end of F2806x_I2C_DEFINES_H definition

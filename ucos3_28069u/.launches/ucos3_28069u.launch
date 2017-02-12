@@ -5,7 +5,7 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.Texas Instruments XDS2xx USB Debug Probe/C28xx" value="${build_artifact:ucos3_28069u}"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.Texas Instruments XDS2xx USB Debug Probe/C28xx" value="ucos3_28069u"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:ucos3_28069u}"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.Texas Instruments XDS2xx USB Debug Probe/C28xx" value="C:/03_workspace\ccsv7\ucos3_28069u\Debug\ucos3_28069u.out"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.Texas Instruments XDS2xx USB Debug Probe/C28xx" value="/Volumes/UDISK/ucos3_28069u/ucos3_28069u/Debug/ucos3_28069u.out"/>
 <mapAttribute key="com.ti.ccstudio.debug.ui.displayFormats">
 <mapEntry key="Texas Instruments XDS2xx USB Debug Probe/C28xx@##separator##@0" value="16-Bit Hex - TI Style"/>
 <mapEntry key="Texas Instruments XDS2xx USB Debug Probe/C28xx@##separator##@1" value="16-Bit Hex - TI Style"/>

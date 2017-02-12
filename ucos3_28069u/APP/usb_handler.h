@@ -1,7 +1,7 @@
 /*
  * usb_handler.h
  *
- *  Created on: 2017Äê1ÔÂ31ÈÕ
+ *  Created on: 2017ï¿½ï¿½1ï¿½ï¿½31ï¿½ï¿½
  *      Author: ZCTIAXIA
  */
 
@@ -15,7 +15,7 @@ typedef struct {
     uint8_t Length;
     uint8_t CmdCl;
     uint8_t CmdNum;
-    uint8_t Buffer[BULK_BUFFER_SIZE]; // begin from pid, subid, devid....
+    uint8_t Buffer[256]; // begin from pid, subid, devid....
 } tMSG;
 
 

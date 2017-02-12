@@ -36,13 +36,13 @@ void I2c_Init(void)
 	// Initialize I2C
 	I2caRegs.I2CSAR = 0x0000;		// Slave address - EEPROM control code
 
-	I2caRegs.I2CPSC.all = 8;		// Prescaler - need 7-12 Mhz on module clk
+	I2caRegs.I2CPSC.all = 8;		    // Prescaler - need 7-12 Mhz on module clk
 	I2caRegs.I2CCLKL = 10;			// NOTE: must be non zero
 	I2caRegs.I2CCLKH = 5;			// NOTE: must be non zero
 	I2caRegs.I2CIER.all = 0x3C;		// 0011 1100,Enable SCD & ARDY & XRDY & RRDY interrupts
 
 	I2caRegs.I2CMDR.all = ICMDR_IRS;	// Take I2C out of reset
-										// Stop I2C when suspended
+							        // Stop I2C when suspended
 
 	I2caRegs.I2CFFTX.all = 0x0000;	// Enable FIFO mode and TXFIFO
 	I2caRegs.I2CFFRX.all = 0x0000;	// Enable RXFIFO, clear RXFFINT,
@@ -122,7 +122,7 @@ I2c_Server()
 	// write event
 	if (g_pI2cMsg->Status == I2C_MSGSTAT_SEND_WITHSTOP) {
 		I2C_err = I2CA_WriteData(g_pI2cMsg);
-		if (I2C_err == I2C_SUCCESS){
+		if (I2C_err == I2C_SUCCESS) {
 			//g_pI2cMsg = &I2cMsg;
 		    g_pI2cMsg->Status = I2C_MSGSTAT_WRITE_BUSY;
 		}
@@ -130,9 +130,8 @@ I2c_Server()
 
 	// read event
 	if (g_pI2cMsg->Status == I2C_MSGSTAT_SEND_NOSTOP) {
-		// EEPROM address setup portion
+		// setup I2c read address and length
 		while (I2CA_ReadData(g_pI2cMsg) != I2C_SUCCESS) {
-			//TODO call canbus nack
 		    g_pI2cMsg->ErrNum++;
 			if (g_pI2cMsg->ErrNum >= ERROR_TRYTIMES) {
 				//I2cMsg_Reset();
@@ -141,9 +140,9 @@ I2c_Server()
 		}
 		g_pI2cMsg->Status = I2C_MSGSTAT_SEND_NOSTOP_BUSY;
 	}else if (g_pI2cMsg->Status == I2C_MSGSTAT_RESTART) {
-		// Read data portion
+		// read data after I2c communication restart
 		while (I2CA_ReadData(g_pI2cMsg) != I2C_SUCCESS) {
-			// call CAN_NACK after try number of times,
+			//TODO return read_err info
 		    g_pI2cMsg->ErrNum++;
 			if (g_pI2cMsg->ErrNum >= ERROR_TRYTIMES) {
 				//I2cMsg_Reset();
@@ -160,7 +159,9 @@ __interrupt void i2c_int1a_isr(void)     // I2C-A
     CPU_SR_ALLOC();
 
     CPU_CRITICAL_ENTER();
+
     OSIntEnter();                                           /* Tell uC/OS-II that we are starting an ISR              */
+
     CPU_CRITICAL_EXIT();
 
     Uint16 IntSource;
@@ -173,9 +174,9 @@ __interrupt void i2c_int1a_isr(void)     // I2C-A
     {
         g_pI2cMsg->NackNum = 0;
         // If completed message was writing data, reset msg to inactive state
-        if (g_pI2cMsg->Status == I2C_MSGSTAT_WRITE_BUSY){
+        if (g_pI2cMsg->Status == I2C_MSGSTAT_WRITE_BUSY) {
             g_pI2cMsg->Status = I2C_MSGSTAT_INACTIVE;
-        }else{
+        }else {
             if (g_pI2cMsg->Status == I2C_MSGSTAT_SEND_NOSTOP_BUSY) {
                 g_pI2cMsg->Status = I2C_MSGSTAT_SEND_NOSTOP;
             }else if (g_pI2cMsg->Status == I2C_MSGSTAT_READ_BUSY) {
@@ -191,7 +192,7 @@ __interrupt void i2c_int1a_isr(void)     // I2C-A
         if (I2caRegs.I2CSTR.bit.NACK == 1) {
             I2caRegs.I2CMDR.bit.STP = 1;
             I2caRegs.I2CSTR.all = I2C_CLR_NACK_BIT;
-            //TODO call canbus nack
+            //TODO return NAck err info
             g_pI2cMsg->NackNum++;
             if (g_pI2cMsg->NackNum >= ERROR_TRYTIMES) {
                 //I2cMsg_Reset();  // Reset status after several times of NACK
@@ -227,7 +228,9 @@ __interrupt void i2c_int1a_isr(void)     // I2C-A
 
                                                             /* Re-enable the interrupt.                               */
     BSP_IntAck(BSP_INT_ID_INT8_1);
+
     BSP_IntEn(BSP_INT_ID_INT8_1);
+
     OSIntExit();
 
     OSSemPost(I2cServerRunSem);
