@@ -8,34 +8,7 @@
 #include "os_include.h"
 #include "app_include.h"
 
-/*
-*********************************************************************************************************
-*                                    DELAY TASK FOR SPECIFIED TIME
-*
-* Description: This function is called to answer commands
-*
-* Arguments  : *cmd     pointer to the command to answer
-*
-* Returns    :  0   success
-*               1   fail
-*
-* Note(s)    :
-*********************************************************************************************************
-*/
-INT8U
-SendUsbMsg(tMSG *cmd)
-{
-    INT8U *buffer, os_err;
 
-    buffer = OSMemGet(pPartition32, &os_err);   // allocate memory to store usb msg
-    if (buffer == NULL)
-        return 1;
-
-    memcpy(buffer, cmd, cmd->Length + 5);       // target src len cmdcl cmdnum payload
-
-    os_err = OSQPost(pUsbTxQ, (void*)buffer);   // post os_msg queue
-    return os_err;
-}
 
 
 void
@@ -59,9 +32,12 @@ App_CmdHandler(void *p_arg)
         case 0x15 : // descriptor
             descriptor_handler(cmd);
             SendUsbMsg(cmd);
+            OSMemPut(pPartition256, (void *)cmd);       // return partition applied in UsbRx
+            BSP_LED_On(BSP_LED_LD2);
             break;
         case 0x20: // changer
             changer_handler(cmd);
+            OSMemPut(pPartition256, (void *)cmd);
             break;
         default : break;
         }

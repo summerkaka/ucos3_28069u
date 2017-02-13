@@ -89,7 +89,7 @@ void            *UsbTxQTb[APP_CFG_USBTXQ_NUM];
 
 // eeprom
 OS_EVENT        *pEepromQ;
-OS_EVENT        *EromIdleSem, *EromOverSem;
+OS_EVENT        *EromOverSem;
 void            *EepromQTb[APP_CFG_EROMQ_NUM];
 
 // task queue
@@ -211,7 +211,6 @@ static  void  App_TaskStart (void *p_arg)
 
                                                                 /* eeprom related application                           */
     pEepromQ = OSQCreate(&EepromQTb[0], APP_CFG_EROMQ_NUM);
-    EromIdleSem = OSSemCreate(1);
     EromOverSem = OSSemCreate(0);
 
     OSTaskCreateExt(Eeprom_Thread,

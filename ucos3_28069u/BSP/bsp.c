@@ -254,13 +254,13 @@ void  BSP_Int_Init (void)
                                                                 /*   Set RTOSINT (Context Switch) Interrupt handler.    */
     BSP_IntVectSet(BSP_INT_ID_RTOSINT, OS_CPU_RTOSINT_Handler);
 
-    //BSP_IntVectSet(BSP_INT_ID_INT8_1, i2c_int1a_isr);
+    BSP_IntVectSet(BSP_INT_ID_INT8_1, i2c_int1a_isr);
 
     BSP_IntVectSet(BSP_INT_ID_INT5_8, f28x_USB0DeviceIntHandler);
 
     PieCtrlRegs.PIEIER5.bit.INTx8 = 1;      // Enable PIE Group 5 INT8  USB0 INT
-    //PieCtrlRegs.PIEIER8.bit.INTx1 = 1;      // Enable PIE Group 8 INT1  I2CA NONE FIFO INT
-    IER |= M_INT5;
+    PieCtrlRegs.PIEIER8.bit.INTx1 = 1;      // Enable PIE Group 8 INT1  I2CA NONE FIFO INT
+    IER |= M_INT5 | M_INT8;
 }
 
 
@@ -311,6 +311,16 @@ void  BSP_Gpio_Init (void)
     GpioCtrlRegs.GPBMUX2.bit.GPIO56 = 0;    // 0=GPIO
     GpioCtrlRegs.GPBDIR.bit.GPIO56 = 1;     // 1=OUTput,  0=INput
     GpioDataRegs.GPBCLEAR.bit.GPIO56 = 1;     // uncomment if --> Set Low initially
+
+    /* Config I2C Port */
+    GpioCtrlRegs.GPBPUD.bit.GPIO32 = 1;    // Disable pull-up for GPIO32 (SDAA)
+    GpioCtrlRegs.GPBPUD.bit.GPIO33 = 1;    // Disable pull-up for GPIO33 (SCLA)
+    GpioCtrlRegs.GPBQSEL1.bit.GPIO32 = 3;  // Asynch input GPIO32 (SDAA)
+    GpioCtrlRegs.GPBQSEL1.bit.GPIO33 = 3;  // Asynch input GPIO33 (SCLA)
+    GpioCtrlRegs.GPBMUX1.bit.GPIO32 = 1;   // Configure GPIO32 for SDAA operation
+    GpioCtrlRegs.GPBMUX1.bit.GPIO33 = 1;   // Configure GPIO33 for SCLA operation
+
+
 }
 
 /*
@@ -396,7 +406,7 @@ void BSP_PeripheralClock_Init(void)
     //SysCtrlRegs.PCLKCR0.bit.ECANAENCLK= 1;
     //SysCtrlRegs.PCLKCR0.bit.SPIAENCLK = 1;
     //SysCtrlRegs.PCLKCR0.bit.SPIBENCLK = 1;
-    //SysCtrlRegs.PCLKCR0.bit.I2CAENCLK = 1;
+    SysCtrlRegs.PCLKCR0.bit.I2CAENCLK = 1;
     //SysCtrlRegs.PCLKCR0.bit.SCIBENCLK = 1;
     //SysCtrlRegs.PCLKCR1.bit.EQEP1ENCLK = 1;
     //SysCtrlRegs.PCLKCR1.bit.EPWM1ENCLK = 1;

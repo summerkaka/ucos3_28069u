@@ -19,6 +19,7 @@ typedef struct {
 } tMSG;
 
 
+INT8U SendUsbMsg(tMSG *msg);
 void App_TaskUsbRx (void  *p_arg);
 void App_TaskUsbTx (void  *p_arg);
 

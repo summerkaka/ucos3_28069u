@@ -9,6 +9,35 @@
 #include "app_include.h"
 
 
+/*
+*********************************************************************************************************
+*                                    SendUsbMsg()
+*
+* Description: This function is called to answer commands
+*
+* Arguments  : *cmd     pointer to the command to answer
+*
+* Returns    :  0   success
+*               1   fail
+*
+* Note(s)    :
+*********************************************************************************************************
+*/
+INT8U
+SendUsbMsg(tMSG *cmd)
+{
+    INT8U *buffer, os_err;
+
+    buffer = OSMemGet(pPartition256, &os_err);   // apply partition to store usb msg
+    if (buffer == NULL)
+        return 1;
+
+    memcpy(buffer, cmd, cmd->Length + 5);       // target src len cmdcl cmdnum payload
+
+    os_err = OSQPost(pUsbTxQ, (void*)buffer);   // post os_msg queue
+    return os_err;
+}
+
 
 static uint8_t
 MsgCoding(uint8_t *buffer, const uint8_t *origin, uint8_t origin_len)
@@ -45,11 +74,10 @@ App_TaskUsbRx (void  *p_arg)
         msgq_ptr = (INT8U *)OSQPend( pUsbRxQ, 0, &os_err);
 
         // 1st byte is length
-        length = *msgq_ptr - 4;     // remove sof & eof
+        length = *msgq_ptr - 5;     // remove length & sof & eof
 
         if (length > BULK_BUFFER_SIZE) {
-            OSMemPut(pPartition256, (void *)msgq_ptr);
-            continue;
+            goto end;
         }
 
         // buffer for decoding message
@@ -60,7 +88,7 @@ App_TaskUsbRx (void  *p_arg)
 
         // store the usb msg to local buffer, decode CAN29 DLE
         readindex = writeindex = 0;
-        while(readindex <= length) {
+        while(readindex < length) {
             buffer[writeindex] = *(msg_header + readindex++);
             if (buffer[writeindex] == 0x10) {
                 if(*(msg_header + readindex) == 0x10) { // 0x10 0x10
@@ -68,10 +96,9 @@ App_TaskUsbRx (void  *p_arg)
                 }else if (*(msg_header + readindex) == 0x0D) { // 0x10 0x0d
                     buffer[writeindex] = 0x0D;
                     readindex++;
-                }else if (*(msg_header + readindex + 1) != 0x02 && *(msg_header + readindex + 1) != 0x03) {
+                }else if (*(msg_header + readindex) != 0x02 && *(msg_header + readindex) != 0x03) {
                     // msg has error, directly return
-                    OSMemPut(pPartition256, (void *)msgq_ptr);
-                    continue;
+                    goto end;
                 }
             }
             writeindex++;
@@ -80,7 +107,8 @@ App_TaskUsbRx (void  *p_arg)
         // post TaskQueue
         OSQPost(pTaskQ, (void*)buffer);
 
-        // return memory of UsbRx
+end:
+        // return partition applied in MsgHandler()
         OSMemPut(pPartition256, (void *)msgq_ptr);
     }
 }
@@ -100,6 +128,7 @@ App_TaskUsbTx (void  *p_arg)
                                                                 /* Task body, always written as an infinite loop.       */
     while (DEF_TRUE) {
         msg = (tMSG *)OSQPend( pUsbTxQ, 0, &os_err );
+
         buffer[0] = 0x10;
         buffer[1] = 0x02;
         length = MsgCoding((uint8_t *)(buffer + 2), (const uint8_t *)msg, msg->Length + 5) + 4;  // +4 is for all data with sof & eof
@@ -119,7 +148,7 @@ App_TaskUsbTx (void  *p_arg)
                 OSMemPut(pPartition256, (void *)msg);
                 break;
             }
-            OSTimeDlyHMSM(0, 0, 1, 0);
+            OSTimeDlyHMSM(0, 0, 0, 20);
         }
 
         ulWriteIndex = sTxRing.ui32WriteIndex;

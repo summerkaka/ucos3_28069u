@@ -10,24 +10,16 @@
 
 static INT8U I2c_Server(void);
 __interrupt void i2c_int1a_isr(void);
-
 static Uint16 I2C_err;
-
 struct I2CMSG *g_pI2cMsg;
-Uint16 I2cBuffer[I2C_MAX_BUFFER_SIZE];
+//Uint16 I2cBuffer[I2C_MAX_BUFFER_SIZE];
 
 void
 StartI2cTask(struct I2CMSG *tcb)
 {
     INT8U os_err;
 
-    OS_SEM_DATA i2csem; // make sure I2c thread is idle again just for protection
-    OSSemQuery(I2cIdleSem, &i2csem);
-    BSP_LED_On(BSP_LED_LD2);
-    if (!i2csem.OSCnt)
-        return;
-
-
+    OSSemPend(I2cIdleSem, 0, &os_err);
 
     OSMutexPend(I2cTcbMutex, 0, &os_err);
     g_pI2cMsg = tcb;
@@ -112,7 +104,9 @@ I2c_Thread(void *p_arg)
 	              &os_err);
 
 	    if (!I2c_Server()) {            // return I2C_MSGSTAT_INACTIVE
+
 	        OSSemPost(I2cOverSem);
+
 	        OSSemPost(I2cIdleSem);
 	    }
 	}

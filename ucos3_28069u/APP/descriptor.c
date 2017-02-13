@@ -30,8 +30,6 @@ descriptor_handler(tMSG *cmd)
 
     memcpy(mem_ptr, &erom_ops, sizeof(tEepromTask));    // copy msg to partition
 
-    OSSemPend(EromIdleSem, 0, &os_err);                 // wait for eeprom idle
-
     OSQPost(pEepromQ, (void*)mem_ptr);                  // post os_msg queue
 
     OSSemPend(EromOverSem, 0, &os_err);                 // wait for eeprom r/w finish

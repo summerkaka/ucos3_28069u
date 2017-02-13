@@ -21,7 +21,6 @@ extern OS_EVENT         *I2cIdleSem;
 extern OS_EVENT         *I2cOverSem;
 extern OS_EVENT         *I2cTcbMutex;
 
-extern OS_EVENT         *EromIdleSem;
 extern OS_EVENT         *EromOverSem;
 
 extern OS_EVENT         *pEepromQ;
