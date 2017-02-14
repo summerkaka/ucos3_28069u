@@ -23,17 +23,16 @@ App_CmdHandler(void *p_arg)
     while (DEF_TRUE) {
         cmd = (tMSG *)OSQPend( pTaskQ, 0, &os_err );
 
-        if (cmd->Target != 0x19) {
+        if (cmd->target != 0x19) {
             // convey msg to CAN bus
             continue;
         }
 
-        switch (cmd->CmdNum) {
+        switch (cmd->cmdnum) {
         case 0x15 : // descriptor
             descriptor_handler(cmd);
             SendUsbMsg(cmd);
             OSMemPut(pPartition256, (void *)cmd);       // return partition applied in UsbRx
-            BSP_LED_On(BSP_LED_LD2);
             break;
         case 0x20: // changer
             changer_handler(cmd);

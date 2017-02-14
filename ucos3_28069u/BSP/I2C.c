@@ -25,7 +25,6 @@ StartI2cTask(struct I2CMSG *tcb)
     g_pI2cMsg = tcb;
     OSMutexPost(I2cTcbMutex);
 
-
     OSSemPost(I2cServerRunSem);
 }
 

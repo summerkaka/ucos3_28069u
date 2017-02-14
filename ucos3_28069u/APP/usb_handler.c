@@ -9,6 +9,46 @@
 #include "app_include.h"
 
 
+
+/*
+*********************************************************************************************************
+*                                    UsbPrintf()
+*
+* Description: This function is called to printf string via usb bulk endpoint
+* Arguments  : *pdata     pointer to the string
+*               length    length of the string
+* Returns    :
+* Note(s)    :
+*********************************************************************************************************
+*/
+void
+UsbPrintf(char *pdata, Uint8 length)
+{
+    uint32_t ulSpace, ulWriteIndex;
+    tUSBRingBufObject sTxRing;
+    Uint8 i = 0;
+
+    if (length > 256)
+        return;
+
+    while (DEF_TRUE) {
+        USBBufferInfoGet(&g_sTxBuffer, &sTxRing);
+        ulSpace = USBBufferSpaceAvailable(&g_sTxBuffer);
+        if (ulSpace >= length) {  // check if space available
+            break;
+        }
+        OSTimeDlyHMSM(0, 0, 0, 20);
+    }
+
+    ulWriteIndex = sTxRing.ui32WriteIndex;
+    for (i = 0; i < length; i++) {
+        g_pui8USBTxBuffer[ulWriteIndex++] = *(pdata + i);
+        ulWriteIndex = (ulWriteIndex == BULK_BUFFER_SIZE) ? 0 : ulWriteIndex;
+    }
+    USBBufferDataWritten(&g_sTxBuffer, length);
+}
+
+
 /*
 *********************************************************************************************************
 *                                    SendUsbMsg()
@@ -23,16 +63,16 @@
 * Note(s)    :
 *********************************************************************************************************
 */
-INT8U
+INT8S
 SendUsbMsg(tMSG *cmd)
 {
     INT8U *buffer, os_err;
 
     buffer = OSMemGet(pPartition256, &os_err);   // apply partition to store usb msg
     if (buffer == NULL)
-        return 1;
+        return -1;
 
-    memcpy(buffer, cmd, cmd->Length + 5);       // target src len cmdcl cmdnum payload
+    memcpy(buffer, cmd, cmd->length + 5);       // target src len cmdcl cmdnum payload
 
     os_err = OSQPost(pUsbTxQ, (void*)buffer);   // post os_msg queue
     return os_err;
@@ -131,11 +171,11 @@ App_TaskUsbTx (void  *p_arg)
 
         buffer[0] = 0x10;
         buffer[1] = 0x02;
-        length = MsgCoding((uint8_t *)(buffer + 2), (const uint8_t *)msg, msg->Length + 5) + 4;  // +4 is for all data with sof & eof
+        length = MsgCoding((uint8_t *)(buffer + 2), (const uint8_t *)msg, msg->length + 5) + 4;  // +4 is for all data with sof & eof
         buffer[length - 2] = 0x10;
         buffer[length - 1] = 0x03;
 #if DEBUG
-        buffer[length++] = msg->Length;
+        buffer[length++] = msg->length;
         buffer[length++] = (uint32_t)msg >> 24;
         buffer[length++] = (uint32_t)msg >> 16;
         buffer[length++] = (uint32_t)msg >> 8;

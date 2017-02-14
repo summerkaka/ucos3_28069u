@@ -1,10 +1,10 @@
 ******************************************************************************
              TMS320C2000 Linker Unix v16.9.1                   
 ******************************************************************************
->> Linked Mon Feb 13 23:58:33 2017
+>> Linked Tue Feb 14 21:27:32 2017
 
 OUTPUT FILE NAME:   <ucos3_28069u.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 003de7c9
+ENTRY POINT SYMBOL: "_c_int00"  address: 003de872
 
 
 MEMORY CONFIGURATION
@@ -16,7 +16,7 @@ PAGE 0:
   RAML1                 00008800   00000400  00000000  00000400  RWIX
   OTP                   003d7800   00000400  00000000  00000400  RWIX
   FLASHH                003d8000   00004000  00004000  00000000  RWIX
-  FLASHG                003dc000   00004000  00002a9e  00001562  RWIX
+  FLASHG                003dc000   00004000  00002af7  00001509  RWIX
   FLASHF                003e0000   00004000  00000000  00004000  RWIX
   FLASHE                003e4000   00004000  00000000  00004000  RWIX
   FLASHD                003e8000   00004000  00000000  00004000  RWIX
@@ -189,7 +189,7 @@ vectors    0    003fffc2    00000000     DSECT
                   003dbfe8    00000016     rts2800_fpu32.lib : ul_tofd28.obj (.text)
                   003dbffe    00000002                       : pre_init.obj (.text)
 
-.text.2    0    003dc000    00002a9e     
+.text.2    0    003dc000    00002af7     
                   003dc000    000003fe     usblib.lib : usbhhub.obj (.text)
                   003dc3fe    000003fc     os_q.obj (.text)
                   003dc7fa    00000321     usblib.lib : usbdbulk.obj (.text)
@@ -197,50 +197,50 @@ vectors    0    003fffc2    00000000     DSECT
                   003dcd70    0000021f     os_sem.obj (.text)
                   003dcf8f    000001fd     usblib.lib : usbdconfig.obj (.text)
                   003dd18c    0000019d     driverlib.lib : interrupt.obj (.text)
-                  003dd329    00000194     os_mem.obj (.text)
-                  003dd4bd    0000015d     usb_handler.obj (.text)
-                  003dd61a    00000150     usblib.lib : usbdcdesc.obj (.text)
-                  003dd76a    00000146                : usbringbuf.obj (.text)
-                  003dd8b0    00000141     app.obj (.text)
-                  003dd9f1    0000013f     os_cpu_c.obj (.text)
-                  003ddb30    0000011d     usb_dev_bulk.obj (.text)
-                  003ddc4d    0000010e     os_time.obj (.text)
-                  003ddd5b    000000f8     I2C.obj (.text)
-                  003dde53    000000f0     bsp.obj (.text)
-                  003ddf43    000000d2     usblib.lib : usbdma.obj (.text)
-                  003de015    000000cb     cpu_core.obj (.text)
-                  003de0e0    000000cb     usblib.lib : usbdesc.obj (.text)
-                  003de1ab    000000ab     bsp_int.obj (.text)
-                  003de256    000000aa     I2C.obj (.text:retain)
-                  003de300    000000a4     os_cpu_a.obj (.text)
-                  003de3a4    000000a2     usb_hal.obj (.text:retain)
-                  003de446    0000009c     rts2800_fpu32.lib : fd_add28.obj (.text)
-                  003de4e2    0000008d     os_dbg.obj (.text)
-                  003de56f    0000008b     rts2800_fpu32.lib : fd_div28.obj (.text)
-                  003de5fa    00000083                       : fd_mpy28.obj (.text)
-                  003de67d    00000082     usblib.lib : usbtick.obj (.text)
-                  003de6ff    00000073     cpu_c.obj (.text)
-                  003de772    00000057     bsp_led.obj (.text)
-                  003de7c9    00000056     rts2800_fpu32.lib : boot28.obj (.text)
-                  003de81f    00000053     descriptor.obj (.text)
-                  003de872    0000004a     bsp_int.obj (.text:retain)
-                  003de8bc    00000043     bsp_os.obj (.text:retain)
-                  003de8ff    00000037     eeprom.obj (.text)
-                  003de936    00000031     bsp_os.obj (.text)
-                  003de967    0000002e     cmd_handler.obj (.text)
-                  003de995    00000029     rts2800_fpu32.lib : exit.obj (.text)
-                  003de9be    00000024                       : cpy_tbl.obj (.text)
-                  003de9e2    0000001f     cpu_a.obj (.text)
-                  003dea01    0000001e     rts2800_fpu32.lib : memcpy.obj (.text)
-                  003dea1f    0000001b                       : fd_toul28.obj (.text)
-                  003dea3a    00000019                       : args_main.obj (.text)
-                  003dea53    00000012     usblib.lib : usbdhandler.obj (.text)
-                  003dea65    0000000f     bsp_start.obj (.text)
-                  003dea74    0000000e     rts2800_fpu32.lib : fd_sub28.obj (.text)
-                  003dea82    0000000d     driverlib.lib : interrupt.obj (.text:retain)
-                  003dea8f    00000009     rts2800_fpu32.lib : _lock.obj (.text)
-                  003dea98    00000005     changer.obj (.text)
-                  003dea9d    00000001     rts2800_fpu32.lib : startup.obj (.text)
+                  003dd329    0000019d     usb_handler.obj (.text)
+                  003dd4c6    00000194     os_mem.obj (.text)
+                  003dd65a    00000150     usblib.lib : usbdcdesc.obj (.text)
+                  003dd7aa    00000146                : usbringbuf.obj (.text)
+                  003dd8f0    00000141     app.obj (.text)
+                  003dda31    0000013f     os_cpu_c.obj (.text)
+                  003ddb70    0000011d     usb_dev_bulk.obj (.text)
+                  003ddc8d    0000010e     os_time.obj (.text)
+                  003ddd9b    000000f8     I2C.obj (.text)
+                  003dde93    000000f0     bsp.obj (.text)
+                  003ddf83    000000d2     usblib.lib : usbdma.obj (.text)
+                  003de055    000000cb     cpu_core.obj (.text)
+                  003de120    000000cb     usblib.lib : usbdesc.obj (.text)
+                  003de1eb    000000ab     bsp_int.obj (.text)
+                  003de296    000000aa     I2C.obj (.text:retain)
+                  003de340    000000a4     os_cpu_a.obj (.text)
+                  003de3e4    000000a2     usb_hal.obj (.text:retain)
+                  003de486    0000009c     rts2800_fpu32.lib : fd_add28.obj (.text)
+                  003de522    0000008d     os_dbg.obj (.text)
+                  003de5af    0000008b     rts2800_fpu32.lib : fd_div28.obj (.text)
+                  003de63a    00000083                       : fd_mpy28.obj (.text)
+                  003de6bd    00000082     usblib.lib : usbtick.obj (.text)
+                  003de73f    00000073     cpu_c.obj (.text)
+                  003de7b2    00000069     descriptor.obj (.text)
+                  003de81b    00000057     bsp_led.obj (.text)
+                  003de872    00000056     rts2800_fpu32.lib : boot28.obj (.text)
+                  003de8c8    0000004a     bsp_int.obj (.text:retain)
+                  003de912    00000043     bsp_os.obj (.text:retain)
+                  003de955    0000003d     eeprom.obj (.text)
+                  003de992    00000031     bsp_os.obj (.text)
+                  003de9c3    0000002b     cmd_handler.obj (.text)
+                  003de9ee    00000029     rts2800_fpu32.lib : exit.obj (.text)
+                  003dea17    00000024                       : cpy_tbl.obj (.text)
+                  003dea3b    0000001f     cpu_a.obj (.text)
+                  003dea5a    0000001e     rts2800_fpu32.lib : memcpy.obj (.text)
+                  003dea78    0000001b                       : fd_toul28.obj (.text)
+                  003dea93    00000019                       : args_main.obj (.text)
+                  003deaac    00000012     usblib.lib : usbdhandler.obj (.text)
+                  003deabe    0000000f     bsp_start.obj (.text)
+                  003deacd    0000000e     rts2800_fpu32.lib : fd_sub28.obj (.text)
+                  003deadb    0000000d     driverlib.lib : interrupt.obj (.text:retain)
+                  003deae8    00000009     rts2800_fpu32.lib : _lock.obj (.text)
+                  003deaf1    00000005     changer.obj (.text)
+                  003deaf6    00000001     rts2800_fpu32.lib : startup.obj (.text)
 
 FlashCallbackVar 
 *          1    00000000    00000002     UNINITIALIZED
@@ -505,14 +505,14 @@ MODULE SUMMARY
     ./APP/
        app.obj                         321     0                  5248              
        usb_bulk_structs.obj            0       221                640               
-       usb_handler.obj                 349     0                  0                 
+       usb_handler.obj                 413     0                  0                 
        usb_dev_bulk.obj                285     12                 3                 
-       descriptor.obj                  83      0                  0                 
-       eeprom.obj                      55      0                  0                 
-       cmd_handler.obj                 46      0                  0                 
+       descriptor.obj                  105     0                  0                 
+       eeprom.obj                      61      0                  0                 
+       cmd_handler.obj                 43      0                  0                 
        changer.obj                     5       0                  0                 
     +--+-------------------------------+-------+------------------+--------------------+
-       Total:                          1144    233                5891              
+       Total:                          1233    233                5891              
                                                                                     
     ./BSP/
        bsp_int.obj                     245     0                  256               
@@ -620,7 +620,7 @@ MODULE SUMMARY
                                                                                     
        Stack:                          0       0                  768               
     +--+-------------------------------+-------+------------------+--------------------+
-       Grand Total:                    27296   1254               18100             
+       Grand Total:                    27385   1254               18100             
 
 
 GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
@@ -941,61 +941,61 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 page  address   name                                  
 ----  -------   ----                                  
 abs   ffffffff  .text                                 
-0     003de995  C$$EXIT                               
-0     003de446  FD$$ADD                               
-0     003de56f  FD$$DIV                               
-0     003de5fa  FD$$MPY                               
-0     003dea74  FD$$SUB                               
-0     003dea1f  FD$$TOUL                              
+0     003de9ee  C$$EXIT                               
+0     003de486  FD$$ADD                               
+0     003de5af  FD$$DIV                               
+0     003de63a  FD$$MPY                               
+0     003deacd  FD$$SUB                               
+0     003dea78  FD$$TOUL                              
 0     003dbfe8  UL$$TOFD                              
 1     00007100  _AdcRegs                              
 1     00000b00  _AdcResult                            
 1     0000a000  _AppTaskObjSem                        
-0     003de967  _App_CmdHandler                       
+0     003de9c3  _App_CmdHandler                       
 1     0000a980  _App_CmdHandler_Stk                   
 1     0000a380  _App_TaskPendStk                      
 1     0000a080  _App_TaskPostStk                      
 1     0000a280  _App_TaskStartStk                     
-0     003dd50a  _App_TaskUsbRx                        
-0     003dd562  _App_TaskUsbTx                        
+0     003dd3b6  _App_TaskUsbRx                        
+0     003dd40e  _App_TaskUsbTx                        
 1     0000a780  _App_UsbRx_Stk                        
 1     0000a580  _App_UsbTx_Stk                        
-0     003dde77  _BSP_CPU_ClkFreq                      
-0     003de22a  _BSP_ExtIntDis                        
-0     003de217  _BSP_ExtIntEn                         
-0     003dde53  _BSP_Init                             
-0     003de1ab  _BSP_IntAck                           
-0     003de1f0  _BSP_IntDis                           
-0     003de1ca  _BSP_IntEn                            
-0     003de872  _BSP_IntHandlerDummy                  
-0     003de23d  _BSP_IntVectSet                       
-0     003de78f  _BSP_LED_Off                          
-0     003de772  _BSP_LED_On                           
-0     003de7ac  _BSP_LED_Toggle                       
-0     003de8bc  _BSP_OS_TIMER2_TickHandler            
-0     003de936  _BSP_OS_TIMER2_TickInit               
-0     003dea65  _BSP_RAM_StartHere                    
-0     003dde66  _BSP_Tick_Init                        
-0     003de9f3  _CPU_CntLeadZeros                     
-0     003de017  _CPU_CntLeadZeros08                   
-0     003de021  _CPU_CntLeadZeros16                   
-0     003de028  _CPU_CntLeadZeros32                   
-0     003de060  _CPU_CntTrailZeros                    
-0     003de072  _CPU_CntTrailZeros08                  
-0     003de084  _CPU_CntTrailZeros16                  
-0     003de096  _CPU_CntTrailZeros32                  
+0     003ddeb7  _BSP_CPU_ClkFreq                      
+0     003de26a  _BSP_ExtIntDis                        
+0     003de257  _BSP_ExtIntEn                         
+0     003dde93  _BSP_Init                             
+0     003de1eb  _BSP_IntAck                           
+0     003de230  _BSP_IntDis                           
+0     003de20a  _BSP_IntEn                            
+0     003de8c8  _BSP_IntHandlerDummy                  
+0     003de27d  _BSP_IntVectSet                       
+0     003de838  _BSP_LED_Off                          
+0     003de81b  _BSP_LED_On                           
+0     003de855  _BSP_LED_Toggle                       
+0     003de912  _BSP_OS_TIMER2_TickHandler            
+0     003de992  _BSP_OS_TIMER2_TickInit               
+0     003deabe  _BSP_RAM_StartHere                    
+0     003ddea6  _BSP_Tick_Init                        
+0     003dea4c  _CPU_CntLeadZeros                     
+0     003de057  _CPU_CntLeadZeros08                   
+0     003de061  _CPU_CntLeadZeros16                   
+0     003de068  _CPU_CntLeadZeros32                   
+0     003de0a0  _CPU_CntTrailZeros                    
+0     003de0b2  _CPU_CntTrailZeros08                  
+0     003de0c4  _CPU_CntTrailZeros16                  
+0     003de0d6  _CPU_CntTrailZeros32                  
 0     003f43f6  _CPU_EndiannessTest                   
-0     003de015  _CPU_Init                             
-0     003de9e2  _CPU_IntDis                           
-0     003de9e4  _CPU_IntEn                            
-0     003de6ff  _CPU_IntSrcDis                        
-0     003de715  _CPU_IntSrcEn                         
-0     003de72a  _CPU_IntSrcPendClr                    
-0     003de0aa  _CPU_PopCnt32                         
-0     003de9ff  _CPU_RevBits                          
-0     003de9eb  _CPU_SR_Restore                       
-0     003de9e6  _CPU_SR_Save                          
-0     003de016  _CPU_SW_Exception                     
+0     003de055  _CPU_Init                             
+0     003dea3b  _CPU_IntDis                           
+0     003dea3d  _CPU_IntEn                            
+0     003de73f  _CPU_IntSrcDis                        
+0     003de755  _CPU_IntSrcEn                         
+0     003de76a  _CPU_IntSrcPendClr                    
+0     003de0ea  _CPU_PopCnt32                         
+0     003dea58  _CPU_RevBits                          
+0     003dea44  _CPU_SR_Restore                       
+0     003dea3f  _CPU_SR_Save                          
+0     003de056  _CPU_SW_Exception                     
 1     00001400  _Cla1Regs                             
 1     00006400  _Comp1Regs                            
 1     00006420  _Comp2Regs                            
@@ -1030,7 +1030,7 @@ abs   ffffffff  .text
 1     00006b40  _EQep2Regs                            
 1     0000a018  _EepromQTb                            
 1     0000a480  _EepromThread_Stk                     
-0     003de8ff  _Eeprom_Thread                        
+0     003de955  _Eeprom_Thread                        
 1     00000004  _EmuBMode                             
 1     00000005  _EmuKey                               
 1     0000a010  _EromOverSem                          
@@ -1050,10 +1050,10 @@ abs   ffffffff  .text
 1     0000a002  _I2cServerRunSem                      
 1     0000a00e  _I2cTcbMutex                          
 1     0000a180  _I2cThread_Stk                        
-0     003ddd7f  _I2c_Init                             
-0     003dddf2  _I2c_Thread                           
+0     003dddbf  _I2c_Init                             
+0     003dde32  _I2c_Thread                           
 1     00007900  _I2caRegs                             
-0     003dea82  _IntDefaultHandler                    
+0     003deadb  _IntDefaultHandler                    
 0     003dd1f9  _IntDisable                           
 0     003dd1d2  _IntEnable                            
 0     003dd190  _IntMasterDisable                     
@@ -1061,10 +1061,10 @@ abs   ffffffff  .text
 0     003dd194  _IntRegister                          
 0     003dd1b2  _IntUnregister                        
 0     003d90ea  _InternalUSBHCDSendEvent              
-0     003de6a6  _InternalUSBRegisterTickHandler       
-0     003de6d4  _InternalUSBStartOfFrameTick          
-0     003de67d  _InternalUSBTickInit                  
-0     003de6a2  _InternalUSBTickReset                 
+0     003de6e6  _InternalUSBRegisterTickHandler       
+0     003de714  _InternalUSBStartOfFrameTick          
+0     003de6bd  _InternalUSBTickInit                  
+0     003de6e2  _InternalUSBTickReset                 
 0     003dd2de  _Interrupt_disable                    
 0     003dd294  _Interrupt_enable                     
 1     0000b516  _Math_RandSeedCur                     
@@ -1078,7 +1078,7 @@ abs   ffffffff  .text
 1     00009024  _OSCtxSwCtr                           
 0     003f4258  _OSDataSize                           
 0     003f4268  _OSDebugEn                            
-0     003de4e2  _OSDebugInit                          
+0     003de522  _OSDebugInit                          
 0     003f4274  _OSEndiannessTest                     
 0     003f426e  _OSEventEn                            
 1     00009022  _OSEventFreeList                      
@@ -1112,24 +1112,24 @@ abs   ffffffff  .text
 1     0000901c  _OSIdleCtrMax                         
 1     00009020  _OSIdleCtrRun                         
 0     003da886  _OSInit                               
-0     003dd9f1  _OSInitHookBegin                      
-0     003dda3b  _OSInitHookEnd                        
+0     003dda31  _OSInitHookBegin                      
+0     003dda7b  _OSInitHookEnd                        
 0     003da89f  _OSIntEnter                           
 0     003da8a9  _OSIntExit                            
 1     00009004  _OSIntNesting                         
 1     0000900a  _OSLockNesting                        
 0     003f424b  _OSLowestPrio                         
 0     003f4249  _OSMboxEn                             
-0     003dd329  _OSMemCreate                          
+0     003dd4c6  _OSMemCreate                          
 0     003f4247  _OSMemEn                              
 1     00009016  _OSMemFreeList                        
-0     003dd392  _OSMemGet                             
+0     003dd52f  _OSMemGet                             
 0     003f4248  _OSMemMax                             
 0     003f424f  _OSMemNameEn                          
-0     003dd3c2  _OSMemNameGet                         
-0     003dd3f3  _OSMemNameSet                         
-0     003dd41a  _OSMemPut                             
-0     003dd449  _OSMemQuery                           
+0     003dd55f  _OSMemNameGet                         
+0     003dd590  _OSMemNameSet                         
+0     003dd5b7  _OSMemPut                             
+0     003dd5e6  _OSMemQuery                           
 0     003f4250  _OSMemSize                            
 1     00009080  _OSMemTbl                             
 0     003f424e  _OSMemTblSize                         
@@ -1174,14 +1174,14 @@ abs   ffffffff  .text
 0     003dcf2b  _OSSemQuery                           
 0     003dcf65  _OSSemSet                             
 0     003da919  _OSStart                              
-0     003de313  _OSStartHighRdy                       
+0     003de353  _OSStartHighRdy                       
 0     003da930  _OSStatInit                           
 1     00009002  _OSStatRdy                            
 0     003f423d  _OSStkWidth                           
 1     00009014  _OSTCBCur                             
 1     00009012  _OSTCBFreeList                        
 1     00009018  _OSTCBHighRdy                         
-0     003ddb2b  _OSTCBInitHook                        
+0     003ddb6b  _OSTCBInitHook                        
 1     0000900e  _OSTCBList                            
 1     00009100  _OSTCBPrioTbl                         
 0     003f4266  _OSTCBPrioTblMax                      
@@ -1192,13 +1192,13 @@ abs   ffffffff  .text
 0     003f4244  _OSTaskCreateEn                       
 0     003daf62  _OSTaskCreateExt                      
 0     003f4245  _OSTaskCreateExtEn                    
-0     003dda3c  _OSTaskCreateHook                     
+0     003dda7c  _OSTaskCreateHook                     
 1     00009009  _OSTaskCtr                            
 0     003dafca  _OSTaskDel                            
 0     003f4243  _OSTaskDelEn                          
-0     003dda40  _OSTaskDelHook                        
+0     003dda80  _OSTaskDelHook                        
 0     003db0bf  _OSTaskDelReq                         
-0     003dda44  _OSTaskIdleHook                       
+0     003dda84  _OSTaskIdleHook                       
 1     00009340  _OSTaskIdleStk                        
 0     003f4241  _OSTaskIdleStkSize                    
 0     003f4267  _OSTaskMax                            
@@ -1213,27 +1213,27 @@ abs   ffffffff  .text
 0     003db373  _OSTaskRegSet                         
 0     003f4265  _OSTaskRegTblSize                     
 0     003db1af  _OSTaskResume                         
-0     003dda45  _OSTaskReturnHook                     
+0     003dda85  _OSTaskReturnHook                     
 0     003f4261  _OSTaskStatEn                         
-0     003dda49  _OSTaskStatHook                       
+0     003dda89  _OSTaskStatHook                       
 1     00009240  _OSTaskStatStk                        
 0     003f425d  _OSTaskStatStkChkEn                   
 0     003f425f  _OSTaskStatStkSize                    
 0     003db214  _OSTaskStkChk                         
-0     003dda4a  _OSTaskStkInit                        
+0     003dda8a  _OSTaskStkInit                        
 0     003db273  _OSTaskSuspend                        
-0     003ddb2a  _OSTaskSwHook                         
+0     003ddb6a  _OSTaskSwHook                         
 0     003f425e  _OSTaskSwHookEn                       
 1     00009003  _OSTickStepState                      
 0     003f4262  _OSTicksPerSec                        
 1     0000901e  _OSTime                               
-0     003ddc4d  _OSTimeDly                            
-0     003ddc8a  _OSTimeDlyHMSM                        
-0     003ddcd2  _OSTimeDlyResume                      
-0     003ddd3d  _OSTimeGet                            
-0     003ddd4c  _OSTimeSet                            
+0     003ddc8d  _OSTimeDly                            
+0     003ddcca  _OSTimeDlyHMSM                        
+0     003ddd12  _OSTimeDlyResume                      
+0     003ddd7d  _OSTimeGet                            
+0     003ddd8c  _OSTimeSet                            
 0     003da950  _OSTimeTick                           
-0     003ddb2f  _OSTimeTickHook                       
+0     003ddb6f  _OSTimeTickHook                       
 0     003f4263  _OSTimeTickHookEn                     
 0     003f4256  _OSTmrCfgMax                          
 0     003f4254  _OSTmrCfgNameEn                       
@@ -1247,11 +1247,11 @@ abs   ffffffff  .text
 0     003f4100  _OSUnMapTbl                           
 0     003da9d0  _OSVersion                            
 0     003f425c  _OSVersionNbr                         
-0     003de300  _OS_CPU_GetST0                        
-0     003de303  _OS_CPU_GetST1                        
-0     003de346  _OS_CPU_RTOSINT_Handler               
-0     003de30b  _OS_CPU_SR_Restore                    
-0     003de306  _OS_CPU_SR_Save                       
+0     003de340  _OS_CPU_GetST0                        
+0     003de343  _OS_CPU_GetST1                        
+0     003de386  _OS_CPU_RTOSINT_Handler               
+0     003de34b  _OS_CPU_SR_Restore                    
+0     003de346  _OS_CPU_SR_Save                       
 0     003da9d3  _OS_Dummy                             
 0     003da9d4  _OS_EventTaskRdy                      
 0     003daaba  _OS_EventTaskRemove                   
@@ -1263,7 +1263,7 @@ abs   ffffffff  .text
 0     003db895  _OS_FlagUnlink                        
 0     003dac1b  _OS_MemClr                            
 0     003dac2a  _OS_MemCopy                           
-0     003dd481  _OS_MemInit                           
+0     003dd61e  _OS_MemInit                           
 0     003dc7c8  _OS_QInit                             
 0     003dac3d  _OS_Sched                             
 0     003dac7c  _OS_StrLen                            
@@ -1282,13 +1282,13 @@ abs   ffffffff  .text
 0     00008000  _RamfuncsLoadEnd                      
 0     00008000  _RamfuncsLoadStart                    
 0     00008000  _RamfuncsRunStart                     
-0     003ddc2c  _RxHandler                            
+0     003ddc6c  _RxHandler                            
 1     00007050  _SciaRegs                             
 1     00007750  _ScibRegs                             
-0     003dd4bd  _SendUsbMsg                           
+0     003dd369  _SendUsbMsg                           
 1     00007040  _SpiaRegs                             
 1     00007740  _SpibRegs                             
-0     003ddd5b  _StartI2cTask                         
+0     003ddd9b  _StartI2cTask                         
 0     003dbfce  _SysCtlClockGet                       
 0     003dbfbd  _SysCtlDelay                          
 0     003dbf7c  _SysCtlPeripheralDisable              
@@ -1300,8 +1300,8 @@ abs   ffffffff  .text
 1     00007010  _SysCtrlRegs                          
 1     00000985  _SysPwrCtrlRegs                       
 1     0000a040  _TaskQTb                              
-0     003ddc25  _TxHandler                            
-0     003dea53  _USB0DeviceIntHandler                 
+0     003ddc65  _TxHandler                            
+0     003deaac  _USB0DeviceIntHandler                 
 0     003dcb6b  _USB0DualModeIntHandler               
 0     003d906f  _USB0HostIntHandler                   
 0     003dcc95  _USB0OTGModeIntHandler                
@@ -1328,12 +1328,12 @@ abs   ffffffff  .text
 0     003dca32  _USBDBulkSetTxCBData                  
 0     003dca1b  _USBDBulkTerm                         
 0     003dcadc  _USBDBulkTxPacketAvailable            
-0     003dd6b7  _USBDCDConfigDescGet                  
-0     003dd692  _USBDCDConfigDescGetNum               
-0     003dd679  _USBDCDConfigDescGetSize              
-0     003dd720  _USBDCDConfigGetInterface             
-0     003dd739  _USBDCDConfigGetInterfaceEndpoint     
-0     003dd6fb  _USBDCDConfigGetNumAlternateInterfaces
+0     003dd6f7  _USBDCDConfigDescGet                  
+0     003dd6d2  _USBDCDConfigDescGetNum               
+0     003dd6b9  _USBDCDConfigDescGetSize              
+0     003dd760  _USBDCDConfigGetInterface             
+0     003dd779  _USBDCDConfigGetInterfaceEndpoint     
+0     003dd73b  _USBDCDConfigGetNumAlternateInterfaces
 0     003d95d5  _USBDCDDeviceInfoInit                 
 0     003d95e5  _USBDCDInit                           
 0     003d96cc  _USBDCDPowerStatusSet                 
@@ -1343,11 +1343,11 @@ abs   ffffffff  .text
 0     003d96b3  _USBDCDSetDefaultConfiguration        
 0     003d96bb  _USBDCDStallEP0                       
 0     003d9663  _USBDCDTerm                           
-0     003de106  _USBDescGet                           
-0     003de17f  _USBDescGetInterface                  
-0     003de199  _USBDescGetInterfaceEndpoint          
-0     003de0e0  _USBDescGetNum                        
-0     003de131  _USBDescGetNumAlternateInterfaces     
+0     003de146  _USBDescGet                           
+0     003de1bf  _USBDescGetInterface                  
+0     003de1d9  _USBDescGetInterfaceEndpoint          
+0     003de120  _USBDescGetNum                        
+0     003de171  _USBDescGetNumAlternateInterfaces     
 0     003da17d  _USBDevAddrGet                        
 0     003da176  _USBDevAddrSet                        
 0     003da161  _USBDevConnect                        
@@ -1456,7 +1456,7 @@ abs   ffffffff  .text
 0     003d9fb8  _USBIntStatusControl                  
 0     003d9fff  _USBIntStatusEndpoint                 
 0     003da016  _USBIntUnregister                     
-0     003ddfbc  _USBLibDMAInit                        
+0     003ddffc  _USBLibDMAInit                        
 0     003da5da  _USBModeGet                           
 0     003da654  _USBNumEndpointsGet                   
 0     003dcd22  _USBOTGMain                           
@@ -1467,25 +1467,26 @@ abs   ffffffff  .text
 0     003da5bc  _USBOTGSessionRequest                 
 0     003da630  _USBPHYPowerOff                       
 0     003da63a  _USBPHYPowerOn                        
-0     003dd83b  _USBRingBufAdvanceRead                
-0     003dd851  _USBRingBufAdvanceWrite               
-0     003dd7f0  _USBRingBufContigFree                 
-0     003dd7e1  _USBRingBufContigUsed                 
-0     003dd7a1  _USBRingBufEmpty                      
-0     003dd7b3  _USBRingBufFlush                      
-0     003dd7d6  _USBRingBufFree                       
-0     003dd788  _USBRingBufFull                       
-0     003dd8a1  _USBRingBufInit                       
-0     003dd822  _USBRingBufRead                       
-0     003dd80f  _USBRingBufReadOne                    
-0     003dd80a  _USBRingBufSize                       
-0     003dd7c6  _USBRingBufUsed                       
-0     003dd889  _USBRingBufWrite                      
-0     003dd875  _USBRingBufWriteOne                   
+0     003dd87b  _USBRingBufAdvanceRead                
+0     003dd891  _USBRingBufAdvanceWrite               
+0     003dd830  _USBRingBufContigFree                 
+0     003dd821  _USBRingBufContigUsed                 
+0     003dd7e1  _USBRingBufEmpty                      
+0     003dd7f3  _USBRingBufFlush                      
+0     003dd816  _USBRingBufFree                       
+0     003dd7c8  _USBRingBufFull                       
+0     003dd8e1  _USBRingBufInit                       
+0     003dd862  _USBRingBufRead                       
+0     003dd84f  _USBRingBufReadOne                    
+0     003dd84a  _USBRingBufSize                       
+0     003dd806  _USBRingBufUsed                       
+0     003dd8c9  _USBRingBufWrite                      
+0     003dd8b5  _USBRingBufWriteOne                   
 0     003dcb55  _USBStackModeSet                      
-0     003ddb42  _USB_Bulk_Init                        
-0     003ddb35  _USB_Init                             
+0     003ddb82  _USB_Bulk_Init                        
+0     003ddb75  _USB_Init                             
 1     00004000  _Usb0Regs                             
+0     003dd329  _UsbPrintf                            
 1     0000a022  _UsbRxQTb                             
 1     0000a02c  _UsbTxQTb                             
 1     00007070  _XIntruptRegs                         
@@ -1501,28 +1502,28 @@ abs   ffffffff  ___TI_prof_data_start
 abs   ffffffff  ___binit__                            
 abs   ffffffff  ___c_args__                           
 0     003f43fa  ___cinit__                            
-0     003ddb30  ___error__                            
+0     003ddb70  ___error__                            
 abs   ffffffff  ___etext__                            
 abs   ffffffff  ___pinit__                            
 abs   ffffffff  ___text__                             
-0     003dea3a  __args_main                           
+0     003dea93  __args_main                           
 1     00009ffe  __lock                                
-0     003dea97  __nop                                 
-0     003dea93  __register_lock                       
-0     003dea8f  __register_unlock                     
+0     003deaf0  __nop                                 
+0     003deaec  __register_lock                       
+0     003deae8  __register_unlock                     
 1     00000400  __stack                               
-0     003dea9d  __system_post_cinit                   
+0     003deaf6  __system_post_cinit                   
 0     003dbffe  __system_pre_init                     
 1     0000b514  __unlock                              
-0     003de995  _abort                                
-0     003de7c9  _c_int00                              
-0     003dea98  _changer_handler                      
-0     003de9be  _copy_in                              
-0     003de81f  _descriptor_handler                   
-0     003de997  _exit                                 
-0     003de3a4  _f28x_USB0DeviceIntHandler            
-0     003de415  _f28x_USB0DualModeIntHandler          
-0     003de3e4  _f28x_USB0HostIntHandler              
+0     003de9ee  _abort                                
+0     003de872  _c_int00                              
+0     003deaf1  _changer_handler                      
+0     003dea17  _copy_in                              
+0     003de7b2  _descriptor_handler                   
+0     003de9f0  _exit                                 
+0     003de3e4  _f28x_USB0DeviceIntHandler            
+0     003de455  _f28x_USB0DualModeIntHandler          
+0     003de424  _f28x_USB0HostIntHandler              
 1     00009c0e  _g_bUSBTimerInitialized               
 1     00009c2e  _g_eOTGModeState                      
 1     00009c2d  _g_iUSBMode                           
@@ -1558,9 +1559,9 @@ abs   ffffffff  ___text__
 1     00009c32  _g_ui32PollRate                       
 1     00009c12  _g_ui32USBSOFCount                    
 1     00009c34  _g_ui32WaitTicks                      
-0     003de256  _i2c_int1a_isr                        
-0     003dd8b0  _main                                 
-0     003dea01  _memcpy                               
+0     003de296  _i2c_int1a_isr                        
+0     003dd8f0  _main                                 
+0     003dea5a  _memcpy                               
 1     0000a004  _pEepromQ                             
 1     0000a012  _pPartition256                        
 1     0000a016  _pPartition32                         
@@ -1835,140 +1836,141 @@ page  address   name
 0     003dd1f9  _IntDisable                           
 0     003dd294  _Interrupt_enable                     
 0     003dd2de  _Interrupt_disable                    
-0     003dd329  _OSMemCreate                          
-0     003dd392  _OSMemGet                             
-0     003dd3c2  _OSMemNameGet                         
-0     003dd3f3  _OSMemNameSet                         
-0     003dd41a  _OSMemPut                             
-0     003dd449  _OSMemQuery                           
-0     003dd481  _OS_MemInit                           
-0     003dd4bd  _SendUsbMsg                           
-0     003dd50a  _App_TaskUsbRx                        
-0     003dd562  _App_TaskUsbTx                        
-0     003dd679  _USBDCDConfigDescGetSize              
-0     003dd692  _USBDCDConfigDescGetNum               
-0     003dd6b7  _USBDCDConfigDescGet                  
-0     003dd6fb  _USBDCDConfigGetNumAlternateInterfaces
-0     003dd720  _USBDCDConfigGetInterface             
-0     003dd739  _USBDCDConfigGetInterfaceEndpoint     
-0     003dd788  _USBRingBufFull                       
-0     003dd7a1  _USBRingBufEmpty                      
-0     003dd7b3  _USBRingBufFlush                      
-0     003dd7c6  _USBRingBufUsed                       
-0     003dd7d6  _USBRingBufFree                       
-0     003dd7e1  _USBRingBufContigUsed                 
-0     003dd7f0  _USBRingBufContigFree                 
-0     003dd80a  _USBRingBufSize                       
-0     003dd80f  _USBRingBufReadOne                    
-0     003dd822  _USBRingBufRead                       
-0     003dd83b  _USBRingBufAdvanceRead                
-0     003dd851  _USBRingBufAdvanceWrite               
-0     003dd875  _USBRingBufWriteOne                   
-0     003dd889  _USBRingBufWrite                      
-0     003dd8a1  _USBRingBufInit                       
-0     003dd8b0  _main                                 
-0     003dd9f1  _OSInitHookBegin                      
-0     003dda3b  _OSInitHookEnd                        
-0     003dda3c  _OSTaskCreateHook                     
-0     003dda40  _OSTaskDelHook                        
-0     003dda44  _OSTaskIdleHook                       
-0     003dda45  _OSTaskReturnHook                     
-0     003dda49  _OSTaskStatHook                       
-0     003dda4a  _OSTaskStkInit                        
-0     003ddb2a  _OSTaskSwHook                         
-0     003ddb2b  _OSTCBInitHook                        
-0     003ddb2f  _OSTimeTickHook                       
-0     003ddb30  ___error__                            
-0     003ddb35  _USB_Init                             
-0     003ddb42  _USB_Bulk_Init                        
-0     003ddc25  _TxHandler                            
-0     003ddc2c  _RxHandler                            
-0     003ddc4d  _OSTimeDly                            
-0     003ddc8a  _OSTimeDlyHMSM                        
-0     003ddcd2  _OSTimeDlyResume                      
-0     003ddd3d  _OSTimeGet                            
-0     003ddd4c  _OSTimeSet                            
-0     003ddd5b  _StartI2cTask                         
-0     003ddd7f  _I2c_Init                             
-0     003dddf2  _I2c_Thread                           
-0     003dde53  _BSP_Init                             
-0     003dde66  _BSP_Tick_Init                        
-0     003dde77  _BSP_CPU_ClkFreq                      
-0     003ddfbc  _USBLibDMAInit                        
-0     003de015  _CPU_Init                             
-0     003de016  _CPU_SW_Exception                     
-0     003de017  _CPU_CntLeadZeros08                   
-0     003de021  _CPU_CntLeadZeros16                   
-0     003de028  _CPU_CntLeadZeros32                   
-0     003de060  _CPU_CntTrailZeros                    
-0     003de072  _CPU_CntTrailZeros08                  
-0     003de084  _CPU_CntTrailZeros16                  
-0     003de096  _CPU_CntTrailZeros32                  
-0     003de0aa  _CPU_PopCnt32                         
-0     003de0e0  _USBDescGetNum                        
-0     003de106  _USBDescGet                           
-0     003de131  _USBDescGetNumAlternateInterfaces     
-0     003de17f  _USBDescGetInterface                  
-0     003de199  _USBDescGetInterfaceEndpoint          
-0     003de1ab  _BSP_IntAck                           
-0     003de1ca  _BSP_IntEn                            
-0     003de1f0  _BSP_IntDis                           
-0     003de217  _BSP_ExtIntEn                         
-0     003de22a  _BSP_ExtIntDis                        
-0     003de23d  _BSP_IntVectSet                       
-0     003de256  _i2c_int1a_isr                        
-0     003de300  _OS_CPU_GetST0                        
-0     003de303  _OS_CPU_GetST1                        
-0     003de306  _OS_CPU_SR_Save                       
-0     003de30b  _OS_CPU_SR_Restore                    
-0     003de313  _OSStartHighRdy                       
-0     003de346  _OS_CPU_RTOSINT_Handler               
-0     003de3a4  _f28x_USB0DeviceIntHandler            
-0     003de3e4  _f28x_USB0HostIntHandler              
-0     003de415  _f28x_USB0DualModeIntHandler          
-0     003de446  FD$$ADD                               
-0     003de4e2  _OSDebugInit                          
-0     003de56f  FD$$DIV                               
-0     003de5fa  FD$$MPY                               
-0     003de67d  _InternalUSBTickInit                  
-0     003de6a2  _InternalUSBTickReset                 
-0     003de6a6  _InternalUSBRegisterTickHandler       
-0     003de6d4  _InternalUSBStartOfFrameTick          
-0     003de6ff  _CPU_IntSrcDis                        
-0     003de715  _CPU_IntSrcEn                         
-0     003de72a  _CPU_IntSrcPendClr                    
-0     003de772  _BSP_LED_On                           
-0     003de78f  _BSP_LED_Off                          
-0     003de7ac  _BSP_LED_Toggle                       
-0     003de7c9  _c_int00                              
-0     003de81f  _descriptor_handler                   
-0     003de872  _BSP_IntHandlerDummy                  
-0     003de8bc  _BSP_OS_TIMER2_TickHandler            
-0     003de8ff  _Eeprom_Thread                        
-0     003de936  _BSP_OS_TIMER2_TickInit               
-0     003de967  _App_CmdHandler                       
-0     003de995  C$$EXIT                               
-0     003de995  _abort                                
-0     003de997  _exit                                 
-0     003de9be  _copy_in                              
-0     003de9e2  _CPU_IntDis                           
-0     003de9e4  _CPU_IntEn                            
-0     003de9e6  _CPU_SR_Save                          
-0     003de9eb  _CPU_SR_Restore                       
-0     003de9f3  _CPU_CntLeadZeros                     
-0     003de9ff  _CPU_RevBits                          
-0     003dea01  _memcpy                               
-0     003dea1f  FD$$TOUL                              
-0     003dea3a  __args_main                           
-0     003dea53  _USB0DeviceIntHandler                 
-0     003dea65  _BSP_RAM_StartHere                    
-0     003dea74  FD$$SUB                               
-0     003dea82  _IntDefaultHandler                    
-0     003dea8f  __register_unlock                     
-0     003dea93  __register_lock                       
-0     003dea97  __nop                                 
-0     003dea98  _changer_handler                      
-0     003dea9d  __system_post_cinit                   
+0     003dd329  _UsbPrintf                            
+0     003dd369  _SendUsbMsg                           
+0     003dd3b6  _App_TaskUsbRx                        
+0     003dd40e  _App_TaskUsbTx                        
+0     003dd4c6  _OSMemCreate                          
+0     003dd52f  _OSMemGet                             
+0     003dd55f  _OSMemNameGet                         
+0     003dd590  _OSMemNameSet                         
+0     003dd5b7  _OSMemPut                             
+0     003dd5e6  _OSMemQuery                           
+0     003dd61e  _OS_MemInit                           
+0     003dd6b9  _USBDCDConfigDescGetSize              
+0     003dd6d2  _USBDCDConfigDescGetNum               
+0     003dd6f7  _USBDCDConfigDescGet                  
+0     003dd73b  _USBDCDConfigGetNumAlternateInterfaces
+0     003dd760  _USBDCDConfigGetInterface             
+0     003dd779  _USBDCDConfigGetInterfaceEndpoint     
+0     003dd7c8  _USBRingBufFull                       
+0     003dd7e1  _USBRingBufEmpty                      
+0     003dd7f3  _USBRingBufFlush                      
+0     003dd806  _USBRingBufUsed                       
+0     003dd816  _USBRingBufFree                       
+0     003dd821  _USBRingBufContigUsed                 
+0     003dd830  _USBRingBufContigFree                 
+0     003dd84a  _USBRingBufSize                       
+0     003dd84f  _USBRingBufReadOne                    
+0     003dd862  _USBRingBufRead                       
+0     003dd87b  _USBRingBufAdvanceRead                
+0     003dd891  _USBRingBufAdvanceWrite               
+0     003dd8b5  _USBRingBufWriteOne                   
+0     003dd8c9  _USBRingBufWrite                      
+0     003dd8e1  _USBRingBufInit                       
+0     003dd8f0  _main                                 
+0     003dda31  _OSInitHookBegin                      
+0     003dda7b  _OSInitHookEnd                        
+0     003dda7c  _OSTaskCreateHook                     
+0     003dda80  _OSTaskDelHook                        
+0     003dda84  _OSTaskIdleHook                       
+0     003dda85  _OSTaskReturnHook                     
+0     003dda89  _OSTaskStatHook                       
+0     003dda8a  _OSTaskStkInit                        
+0     003ddb6a  _OSTaskSwHook                         
+0     003ddb6b  _OSTCBInitHook                        
+0     003ddb6f  _OSTimeTickHook                       
+0     003ddb70  ___error__                            
+0     003ddb75  _USB_Init                             
+0     003ddb82  _USB_Bulk_Init                        
+0     003ddc65  _TxHandler                            
+0     003ddc6c  _RxHandler                            
+0     003ddc8d  _OSTimeDly                            
+0     003ddcca  _OSTimeDlyHMSM                        
+0     003ddd12  _OSTimeDlyResume                      
+0     003ddd7d  _OSTimeGet                            
+0     003ddd8c  _OSTimeSet                            
+0     003ddd9b  _StartI2cTask                         
+0     003dddbf  _I2c_Init                             
+0     003dde32  _I2c_Thread                           
+0     003dde93  _BSP_Init                             
+0     003ddea6  _BSP_Tick_Init                        
+0     003ddeb7  _BSP_CPU_ClkFreq                      
+0     003ddffc  _USBLibDMAInit                        
+0     003de055  _CPU_Init                             
+0     003de056  _CPU_SW_Exception                     
+0     003de057  _CPU_CntLeadZeros08                   
+0     003de061  _CPU_CntLeadZeros16                   
+0     003de068  _CPU_CntLeadZeros32                   
+0     003de0a0  _CPU_CntTrailZeros                    
+0     003de0b2  _CPU_CntTrailZeros08                  
+0     003de0c4  _CPU_CntTrailZeros16                  
+0     003de0d6  _CPU_CntTrailZeros32                  
+0     003de0ea  _CPU_PopCnt32                         
+0     003de120  _USBDescGetNum                        
+0     003de146  _USBDescGet                           
+0     003de171  _USBDescGetNumAlternateInterfaces     
+0     003de1bf  _USBDescGetInterface                  
+0     003de1d9  _USBDescGetInterfaceEndpoint          
+0     003de1eb  _BSP_IntAck                           
+0     003de20a  _BSP_IntEn                            
+0     003de230  _BSP_IntDis                           
+0     003de257  _BSP_ExtIntEn                         
+0     003de26a  _BSP_ExtIntDis                        
+0     003de27d  _BSP_IntVectSet                       
+0     003de296  _i2c_int1a_isr                        
+0     003de340  _OS_CPU_GetST0                        
+0     003de343  _OS_CPU_GetST1                        
+0     003de346  _OS_CPU_SR_Save                       
+0     003de34b  _OS_CPU_SR_Restore                    
+0     003de353  _OSStartHighRdy                       
+0     003de386  _OS_CPU_RTOSINT_Handler               
+0     003de3e4  _f28x_USB0DeviceIntHandler            
+0     003de424  _f28x_USB0HostIntHandler              
+0     003de455  _f28x_USB0DualModeIntHandler          
+0     003de486  FD$$ADD                               
+0     003de522  _OSDebugInit                          
+0     003de5af  FD$$DIV                               
+0     003de63a  FD$$MPY                               
+0     003de6bd  _InternalUSBTickInit                  
+0     003de6e2  _InternalUSBTickReset                 
+0     003de6e6  _InternalUSBRegisterTickHandler       
+0     003de714  _InternalUSBStartOfFrameTick          
+0     003de73f  _CPU_IntSrcDis                        
+0     003de755  _CPU_IntSrcEn                         
+0     003de76a  _CPU_IntSrcPendClr                    
+0     003de7b2  _descriptor_handler                   
+0     003de81b  _BSP_LED_On                           
+0     003de838  _BSP_LED_Off                          
+0     003de855  _BSP_LED_Toggle                       
+0     003de872  _c_int00                              
+0     003de8c8  _BSP_IntHandlerDummy                  
+0     003de912  _BSP_OS_TIMER2_TickHandler            
+0     003de955  _Eeprom_Thread                        
+0     003de992  _BSP_OS_TIMER2_TickInit               
+0     003de9c3  _App_CmdHandler                       
+0     003de9ee  C$$EXIT                               
+0     003de9ee  _abort                                
+0     003de9f0  _exit                                 
+0     003dea17  _copy_in                              
+0     003dea3b  _CPU_IntDis                           
+0     003dea3d  _CPU_IntEn                            
+0     003dea3f  _CPU_SR_Save                          
+0     003dea44  _CPU_SR_Restore                       
+0     003dea4c  _CPU_CntLeadZeros                     
+0     003dea58  _CPU_RevBits                          
+0     003dea5a  _memcpy                               
+0     003dea78  FD$$TOUL                              
+0     003dea93  __args_main                           
+0     003deaac  _USB0DeviceIntHandler                 
+0     003deabe  _BSP_RAM_StartHere                    
+0     003deacd  FD$$SUB                               
+0     003deadb  _IntDefaultHandler                    
+0     003deae8  __register_unlock                     
+0     003deaec  __register_lock                       
+0     003deaf0  __nop                                 
+0     003deaf1  _changer_handler                      
+0     003deaf6  __system_post_cinit                   
 0     003f4100  _OSUnMapTbl                           
 0     003f423c  _OSSemEn                              
 0     003f423d  _OSStkWidth                           
@@ -2209,4 +2211,4 @@ abs   ffffffff  binit
 abs   ffffffff  etext                                 
 abs   ffffffff  pinit                                 
 
-[631 symbols]
+[632 symbols]

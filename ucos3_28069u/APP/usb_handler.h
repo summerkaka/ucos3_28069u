@@ -10,18 +10,19 @@
 
 
 typedef struct {
-    uint8_t Target;
-    uint8_t Src;
-    uint8_t Length;
-    uint8_t CmdCl;
-    uint8_t CmdNum;
-    uint8_t Buffer[256]; // begin from pid, subid, devid....
+    uint8_t target;
+    uint8_t src;
+    uint8_t length;
+    uint8_t cmdCl;
+    uint8_t cmdnum;
+    uint8_t buffer[256]; // begin from pid, subid, devid....
 } tMSG;
 
 
-INT8U SendUsbMsg(tMSG *msg);
-void App_TaskUsbRx (void  *p_arg);
-void App_TaskUsbTx (void  *p_arg);
+void    UsbPrintf       (char *pdata, Uint8 length);
+INT8U   SendUsbMsg      (tMSG *msg);
+void    App_TaskUsbRx   (void  *p_arg);
+void    App_TaskUsbTx   (void  *p_arg);
 
 
 #endif /* APP_USB_HANDLER_H_ */

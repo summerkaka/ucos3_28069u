@@ -23,6 +23,8 @@ Eeprom_Thread(void *p_arg)
 
         i2ctcb.DevAddr = erom->dev_addr;
         i2ctcb.Len = erom->length;
+        if (i2ctcb.Len == 1)
+            BSP_LED_On(BSP_LED_LD2);
         i2ctcb.LongRegAddrFlag = true;
         i2ctcb.RegAddr.all = erom->reg_addr;
         i2ctcb.NackNum = 0;
@@ -31,8 +33,7 @@ Eeprom_Thread(void *p_arg)
 
         if (erom->operation == EROM_READ) {       // read
             i2ctcb.Status = I2C_MSGSTAT_SEND_NOSTOP;
-        }
-        else if (erom->operation == EROM_WRITE) {  // write
+        }else if (erom->operation == EROM_WRITE) {  // write
             i2ctcb.Status = I2C_MSGSTAT_SEND_WITHSTOP;
         }
 
